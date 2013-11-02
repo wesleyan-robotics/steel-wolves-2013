@@ -1,7 +1,7 @@
 #pragma once
 #include "Math.h"
 
-int signOf(int x)
+float signOf(float x)
 {
 	return (x / abs(x));
 }

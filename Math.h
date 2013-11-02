@@ -1,3 +1,3 @@
 #pragma once
 
-int signOf(int x);
+float signOf(float x);
