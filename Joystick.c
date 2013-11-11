@@ -36,9 +36,10 @@ void doJoystickUpdate()
 {
 	joystickDebugDisplay();
 
-    int power = joystickToPower(joystick.joy1_y1) * 0.75;
-    motor[motorE] = power;
-    motor[motorD] = power;
+    int leftPower = joystickToPower(joystick.joy1_y1) * 0.75;
+    int rightPower = joystickToPower(joystick.joy1_y2) * 0.75;
+    motor[motorFL] = motor[motorBL] = leftPower;
+    motor[motorBR] = motor[motorBR] = rightPower;
 }
 
 task joystickListener()
