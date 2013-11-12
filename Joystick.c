@@ -1,12 +1,15 @@
 #pragma once
 #include "Joystick.h";
 
-#include "Math.h";
 #include "JoystickDriver.c"
+#include "Math.h";
+
+const int LOOP_DELAY_TIME = 51;
+const float POWER_LIMIT_FACTOR = 0.75;
 
 int joystickToPower(int x)
 {
-	if(abs(x) > DEAD_ZONE)
+	if (abs(x) > DEAD_ZONE)
 	{
 		float offset = 20.0;
 		float intialOffset = offset * signOf(x);
@@ -36,15 +39,17 @@ void doJoystickUpdate()
 {
 	joystickDebugDisplay();
 
-    int power = joystickToPower(joystick.joy1_y1) * 0.75;
-    motor[motorE] = power;
-    motor[motorD] = power;
+    int power = joystickToPower(joystick.joy1_y1) * POWER_LIMIT_FACTOR ;
+    motor[motorFrontLeft] = power;
+    motor[motorBackLeft] = power;
+    motor[motorFrontRight] = power;
+    motor[motorBackRight] = power;
 }
 
 task joystickListener()
 {
 	while(true) {
-		wait1Msec(51);
+		wait1Msec(LOOP_DELAY_TIME);
 		getJoystickSettings(joystick);
 		doJoystickUpdate();
 	}
