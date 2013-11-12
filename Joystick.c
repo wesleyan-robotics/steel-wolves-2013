@@ -4,9 +4,6 @@
 #include "JoystickDriver.c"
 #include "Math.h";
 
-const int LOOP_DELAY_TIME = 51;
-const float POWER_LIMIT_FACTOR = 0.75;
-
 int joystickToPower(int x)
 {
 	if (abs(x) > DEAD_ZONE)
@@ -39,11 +36,12 @@ void doJoystickUpdate()
 {
 	joystickDebugDisplay();
 
-    int power = joystickToPower(joystick.joy1_y1) * POWER_LIMIT_FACTOR ;
-    motor[motorFrontLeft] = power;
-    motor[motorBackLeft] = power;
-    motor[motorFrontRight] = power;
-    motor[motorBackRight] = power;
+    int leftPower = joystickToPower(joystick.joy1_y1) * POWER_LIMIT_FACTOR;
+    int rightPower = joystickToPower(joystick.joy1_y2) * POWER_LIMIT_FACTOR;
+    motor[motorFrontLeft] = leftPower;
+    motor[motorBackLeft] = leftPower;
+    motor[motorFrontRight] = rightPower;
+    motor[motorBackRight] = rightPower;
 }
 
 task joystickListener()
