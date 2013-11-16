@@ -1,4 +1,4 @@
-#include "MotorConfig.c"
+#include "Config.c"
 
 #include "Math.c"
 #include "Joystick.c"
