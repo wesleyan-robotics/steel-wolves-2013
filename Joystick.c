@@ -43,10 +43,21 @@ void doJoystickUpdate()
 {
 		joystickDebugDisplay();
 		setMotorsWithTurning(joystick.joy1_y1, joystick.joy1_x2);
-		if(joy1Btn(BUTTON_A))
+		if(joy1Btn(BUTTON_A) == 1)
 			motor[motorFlag] = 75;
 		else
 			motor[motorFlag] = 0;
+
+		if(joystick.joy1_TopHat == DPAD_UP)
+		{
+				motor[motorLiftLeft] = 10;
+				motor[motorLiftRight] = 10;
+		}
+		else if(joystick.joy1_TopHat == DPAD_DOWN)
+		{
+				motor[motorLiftLeft] = -10;
+				motor[motorLiftRight] = -10;
+		}
 }
 
 task joystickListener()
