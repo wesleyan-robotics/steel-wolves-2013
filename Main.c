@@ -13,5 +13,6 @@ task main()
 {
 	waitForStart();
 	StartTask(joystickListener);
-	while(true) { continue; }
+
+	while (true);
 }

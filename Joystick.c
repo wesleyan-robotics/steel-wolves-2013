@@ -6,8 +6,7 @@
 
 int joystickToPower(int x)
 {
-	if (abs(x) > DEAD_ZONE)
-	{
+	if (abs(x) > DEAD_ZONE) {
 		float offset = 20.0;
 		float intialOffset = offset * signOf(x);
 
@@ -17,7 +16,8 @@ int joystickToPower(int x)
 
 		return floor(power);
 	}
-	else return 0;
+
+	return 0;
 }
 
 void joystickDebugDisplay()
