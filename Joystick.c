@@ -23,25 +23,41 @@ int joystickToPower(int x)
 void joystickDebugDisplay()
 {
 	eraseDisplay();
-    nxtDisplayTextLine(0, "PowX1: %i", joystickToPower(joystick.joy1_x1));
-    nxtDisplayTextLine(1, "PowY1: %i", joystickToPower(joystick.joy1_y1));
-    nxtDisplayTextLine(3, "PowX2: %i", joystickToPower(joystick.joy1_x2));
-    nxtDisplayTextLine(4, "PowY2: %i", joystickToPower(joystick.joy1_y2));
+    nxtDisplayTextLine(0, "L X: %i, Y: %i", joystick.joy1_x1, joystick.joy1_y1);
+    nxtDisplayTextLine(1, "R X: %i, Y: %i", joystick.joy1_x2, joystick.joy1_y2);
+    nxtDisplayTextLine(3, "%i L | R %i", motor[motorFrontLeft], motor[motorFrontRight]);
+    nxtDisplayTextLine(4, "%i L | R %i", motor[motorBackLeft], motor[motorBackRight]);
+}
 
-    nxtDisplayTextLine(6, "L X: %i, Y: %i", joystick.joy1_x1, joystick.joy1_y1);
-    nxtDisplayTextLine(7, "R X: %i, Y: %i", joystick.joy1_x2, joystick.joy1_y2);
+void setMotorsWithTurning(int motionStick, int turnStick)
+{
+		int adjustedTurnStick = joystickToPower(turnStick + 100);
+		int adjustedPower = joystickToPower(joystick.joy1_y1) * POWER_LIMIT_FACTOR;
+		motor[motorFrontLeft] = (adjustedPower - adjustedTurnStick);
+		motor[motorBackLeft] = (adjustedPower - adjustedTurnStick);
+		motor[motorFrontRight] = (adjustedPower + adjustedTurnStick);
+		motor[motorFrontLeft] = (adjustedPower + adjustedTurnStick);
 }
 
 void doJoystickUpdate()
 {
-	joystickDebugDisplay();
+		joystickDebugDisplay();
+		setMotorsWithTurning(joystick.joy1_y1, joystick.joy1_x2);
+		if(joy1Btn(BUTTON_A) == 1)
+			motor[motorFlag] = 75;
+		else
+			motor[motorFlag] = 0;
 
-    int leftPower = joystickToPower(joystick.joy1_y1) * POWER_LIMIT_FACTOR;
-    int rightPower = joystickToPower(joystick.joy1_y2) * POWER_LIMIT_FACTOR;
-    motor[motorFrontLeft] = leftPower;
-    motor[motorBackLeft] = leftPower;
-    motor[motorFrontRight] = rightPower;
-    motor[motorBackRight] = rightPower;
+		if(joystick.joy1_TopHat == DPAD_UP)
+		{
+				motor[motorLiftLeft] = 10;
+				motor[motorLiftRight] = 10;
+		}
+		else if(joystick.joy1_TopHat == DPAD_DOWN)
+		{
+				motor[motorLiftLeft] = -10;
+				motor[motorLiftRight] = -10;
+		}
 }
 
 task joystickListener()
