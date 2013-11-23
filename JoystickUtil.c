@@ -1,6 +1,8 @@
 #pragma once
 #include "JoystickUtil.h"
 
+#include "JoystickDriver.c"
+
 int joystickToPower(int x)
 {
 	if (abs(x) > DEAD_ZONE) {
