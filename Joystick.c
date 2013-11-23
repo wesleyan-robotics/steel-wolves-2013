@@ -29,14 +29,23 @@ void joystickDebugDisplay()
     nxtDisplayTextLine(4, "%i L | R %i", motor[motorBackLeft], motor[motorBackRight]);
 }
 
-void setMotorsWithTurning(int motionStick, int turnStick)
+void setMotorsWithTurning(int leftStick, int rightStick)
 {
-		int adjustedTurnStick = joystickToPower(turnStick + 100);
-		int adjustedPower = joystickToPower(joystick.joy1_y1) * POWER_LIMIT_FACTOR;
+#if TANK_DRIVING_MODE == 1
+		int leftPower = joystickToPower(leftStick);
+		int rightPower = joystickToPower(rightStick);
+		motor[motorFrontLeft] = leftPower;
+		motor[motorBackLeft] = leftPower;
+		motor[motorFrontRight] = rightPower;
+		motor[motorBackRight] = rightPower;
+#else
+		int adjustedTurnStick = joystickToPower(rightStick + 100);
+		int adjustedPower = joystickToPower(leftStick) * POWER_LIMIT_FACTOR;
 		motor[motorFrontLeft] = (adjustedPower - adjustedTurnStick);
 		motor[motorBackLeft] = (adjustedPower - adjustedTurnStick);
 		motor[motorFrontRight] = (adjustedPower + adjustedTurnStick);
 		motor[motorFrontLeft] = (adjustedPower + adjustedTurnStick);
+#endif
 }
 
 void doJoystickUpdate()
