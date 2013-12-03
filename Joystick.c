@@ -32,6 +32,8 @@ void doJoystickUpdate()
 
 void updateDriving()
 {
+	if (!MOTOR_CONFIG.wheels.isEnabled) return;
+
 	updateWithArcadeDriving();
 }
 
