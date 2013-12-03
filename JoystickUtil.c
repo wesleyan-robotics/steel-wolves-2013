@@ -1,7 +1,7 @@
 #pragma once
 #include "JoystickUtil.h"
 
-#include "JoystickDriver.c"
+#include "JoystickDriver.h"
 
 int joystickToPower(int x)
 {
@@ -24,8 +24,14 @@ void joystickDebugDisplay()
 	eraseDisplay();
     nxtDisplayTextLine(0, "L X: %i, Y: %i", joystick.joy1_x1, joystick.joy1_y1);
     nxtDisplayTextLine(1, "R X: %i, Y: %i", joystick.joy1_x2, joystick.joy1_y2);
-    nxtDisplayTextLine(3, "%i L | R %i", motor[motorFrontLeft], motor[motorFrontRight]);
-    nxtDisplayTextLine(4, "%i L | R %i", motor[motorBackLeft], motor[motorBackRight]);
+
+    if (MOTOR_CONFIG.wheels.isEnabled) {
+	    nxtDisplayTextLine(3, "%i L | R %i", motor[MOTOR_CONFIG.wheels.frontLeft],
+	    				   					 motor[MOTOR_CONFIG.wheels.frontRight]);
+
+	    nxtDisplayTextLine(4, "%i L | R %i", motor[MOTOR_CONFIG.wheels.backLeft],
+	    									 motor[MOTOR_CONFIG.wheels.backRight]);
+	}
 }
 
 HorizontalDirection getHorizontalDirection(int x)

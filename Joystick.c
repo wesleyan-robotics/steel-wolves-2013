@@ -1,7 +1,7 @@
 #pragma once
 #include "Joystick.h";
 
-#include "JoystickDriver.c"
+#include "JoystickDriver.h"
 #include "JoystickUtil.h"
 #include "Math.h";
 #include "DrivingModes.h"
@@ -19,15 +19,15 @@ void doJoystickUpdate()
 {
 	joystickDebugDisplay();
 
-	if (joy1Btn(BUTTON_A)) {
-		servo[servoAuxillaryLift] = 100;
-	} else {
-		servo[servoAuxillaryLift] = 0;
+	if (MOTOR_CONFIG.wheels.isEnabled) {
+		updateDriving();
 	}
-
-	//updateDriving();
-	//updateFlag();
-	//updateLift();
+	if (MOTOR_CONFIG.flag.isEnabled) {
+		updateFlag();
+	}
+	if (MOTOR_CONFIG.lift.isEnabled) {
+		updateLift();
+	}
 }
 
 void updateDriving()
@@ -37,20 +37,30 @@ void updateDriving()
 
 void updateLift()
 {
+	if (!MOTOR_CONFIG.lift.isEnabled) return;
+
 	if (joystick.joy1_TopHat == (short)DPAD_UP) {
-		motor[motorLiftLeft] = LIFT_POWER;
-		motor[motorLiftRight] = LIFT_POWER;
+		motor[MOTOR_CONFIG.lift.left] = LIFT_POWER;
+		motor[MOTOR_CONFIG.lift.right] = LIFT_POWER;
 	} else if (joystick.joy1_TopHat == (short)DPAD_DOWN) {
-		motor[motorLiftLeft] = -LIFT_POWER;
-		motor[motorLiftRight] = -LIFT_POWER;
+		motor[MOTOR_CONFIG.lift.left] = -LIFT_POWER;
+		motor[MOTOR_CONFIG.lift.right] = -LIFT_POWER;
+	}
+
+	if (joy1Btn(BUTTON_A)) {
+		servo[MOTOR_CONFIG.lift.bucketLift] = 100;
+	} else {
+		servo[MOTOR_CONFIG.lift.bucketLift] = 0;
 	}
 }
 
 void updateFlag()
 {
+	if (!MOTOR_CONFIG.flag.isEnabled) return;
+
 	if (joy1Btn(BUTTON_A) == 1) {
-		motor[motorFlag] = FLAG_POWER;
+		motor[MOTOR_CONFIG.flag.id] = FLAG_POWER;
 	} else {
-		motor[motorFlag] = 0;
+		motor[MOTOR_CONFIG.flag.id] = 0;
 	}
 }

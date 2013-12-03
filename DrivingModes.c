@@ -1,11 +1,13 @@
 #pragma once
 #include "DrivingModes.h"
 
-#include "JoystickDriver.c"
+#include "JoystickDriver.h"
 #include "JoystickUtil.h"
 
 void updateWithArcadeDriving()
 {
+	if (!MOTOR_CONFIG.wheels.isEnabled) return;
+
 	int y = joystick.joy1_y1;
 	int x = joystick.joy2_x1;
 
@@ -16,33 +18,35 @@ void updateWithArcadeDriving()
 
 	switch (getHorizontalDirection(x)) {
 		case CENTER:
-			motor[motorFrontRight] = 0;
-			motor[motorBackRight] = 0;
-			motor[motorFrontLeft] = 0;
-			motor[motorBackLeft] = 0;
+			motor[MOTOR_CONFIG.wheels.frontRight] = 0;
+			motor[MOTOR_CONFIG.wheels.backRight] = 0;
+			motor[MOTOR_CONFIG.wheels.frontLeft] = 0;
+			motor[MOTOR_CONFIG.wheels.backLeft] = 0;
 			break;
 		case RIGHT:
-			motor[motorFrontRight] = sidePower;
-			motor[motorBackRight] = sidePower;
-			motor[motorFrontLeft] = 0;
-			motor[motorBackLeft] = 0;
+			motor[MOTOR_CONFIG.wheels.frontRight] = sidePower;
+			motor[MOTOR_CONFIG.wheels.backRight] = sidePower;
+			motor[MOTOR_CONFIG.wheels.frontLeft] = 0;
+			motor[MOTOR_CONFIG.wheels.backLeft] = 0;
 			break;
 		case LEFT:
-			motor[motorFrontRight] = 0;
-			motor[motorBackRight] = 0;
-			motor[motorFrontLeft] = sidePower;
-			motor[motorBackLeft] = sidePower;
+			motor[MOTOR_CONFIG.wheels.frontRight] = 0;
+			motor[MOTOR_CONFIG.wheels.backRight] = 0;
+			motor[MOTOR_CONFIG.wheels.frontLeft] = sidePower;
+			motor[MOTOR_CONFIG.wheels.backLeft] = sidePower;
 			break;
 	}
 }
 
 void updateWithTankDriving()
 {
+	if (!MOTOR_CONFIG.wheels.isEnabled) return;
+
 	int leftPower = joystickToPower(joystick.joy1_y1);
 	int rightPower = joystickToPower(joystick.joy1_y2);
 
-	motor[motorFrontLeft] = leftPower;
-	motor[motorBackLeft] = leftPower;
-	motor[motorFrontRight] = rightPower;
-	motor[motorBackRight] = rightPower;
+	motor[MOTOR_CONFIG.wheels.frontLeft] = leftPower;
+	motor[MOTOR_CONFIG.wheels.backLeft] = leftPower;
+	motor[MOTOR_CONFIG.wheels.frontRight] = rightPower;
+	motor[MOTOR_CONFIG.wheels.backRight] = rightPower;
 }
