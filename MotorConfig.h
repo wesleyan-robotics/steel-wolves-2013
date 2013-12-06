@@ -1,13 +1,6 @@
 #pragma once
 
 typedef struct {
-	int left;
-	int right;
-	int bucketLift;
-	bool isEnabled;
-} LiftConfig;
-
-typedef struct {
 	int frontLeft;
 	int frontRight;
 	int backLeft;
@@ -21,9 +14,23 @@ typedef struct {
 } FlagConfig;
 
 typedef struct {
-	LiftConfig lift;
+	int left;
+	int right;
+	int auxiliaryLift;
+	bool isEnabled;
+} LiftConfig;
+
+typedef struct {
+	int left;
+	int right;
+	bool isEnabled;
+} BucketConfig;
+
+typedef struct {
 	WheelConfig wheels;
+	LiftConfig lift;
 	FlagConfig flag;
+	BucketConfig buckets;
 } MotorConfig;
 
 const int NO_MOTOR = 0;

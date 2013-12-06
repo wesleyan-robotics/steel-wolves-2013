@@ -50,9 +50,9 @@ void updateLift()
 	}
 
 	if (joy1Btn(BUTTON_A)) {
-		servo[MOTOR_CONFIG.lift.bucketLift] = 100;
+		servo[MOTOR_CONFIG.lift.auxiliaryLift] = 100;
 	} else {
-		servo[MOTOR_CONFIG.lift.bucketLift] = 0;
+		servo[MOTOR_CONFIG.lift.auxiliaryLift] = 0;
 	}
 }
 
@@ -61,8 +61,8 @@ void updateFlag()
 	if (!MOTOR_CONFIG.flag.isEnabled) return;
 
 	if (joy1Btn(BUTTON_A) == 1) {
-		motor[MOTOR_CONFIG.flag.id] = FLAG_POWER;
+		servo[MOTOR_CONFIG.flag.id] = FLAG_POWER;
 	} else {
-		motor[MOTOR_CONFIG.flag.id] = 0;
+		servo[MOTOR_CONFIG.flag.id] = 0;
 	}
 }
