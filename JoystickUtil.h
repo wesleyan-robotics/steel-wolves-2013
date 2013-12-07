@@ -42,6 +42,7 @@ const int JOYSTICK_MAX = 127;
 
 const int DEAD_ZONE = 8;
 
+bool isInDeadzone(int x);
 int joystickToPower(int x);
 void joystickDebugDisplay();
 HorizontalDirection getHorizontalDirection(int x);

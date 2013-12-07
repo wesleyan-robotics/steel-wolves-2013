@@ -3,6 +3,10 @@
 
 #include "JoystickDriver.h"
 
+bool isInDeadzone(int x) {
+	return abs(x) < DEAD_ZONE;
+}
+
 int joystickToPower(int x)
 {
 	if (abs(x) > DEAD_ZONE) {
@@ -36,14 +40,22 @@ void joystickDebugDisplay()
 
 HorizontalDirection getHorizontalDirection(int x)
 {
-	if (x == 0) return CENTER;
-	else if (x > 0) return RIGHT;
-	else return LEFT;
+	string toWrite;
+	sprintf(toWrite, "X: %i", x);
+	writeDebugStreamLine(toWrite);
+
+	if (isInDeadzone(x)) return CENTER;
+	if (x > DEAD_ZONE) return RIGHT;
+	return LEFT;
 }
 
 VerticalDirection getVerticalDirection(int y)
 {
-	if (y == 0) return CENTER;
-	else if (y > 0) return UP;
-	else return DOWN;
+	string toWrite;
+	sprintf(toWrite, "Y: %i", y);
+	writeDebugStreamLine(toWrite);
+
+	if (isInDeadzone(y)) return CENTER;
+	if (y > DEAD_ZONE) return UP;
+	return DOWN;
 }

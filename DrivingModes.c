@@ -3,39 +3,25 @@
 
 #include "JoystickDriver.h"
 #include "JoystickUtil.h"
+#include "MotorUtil.h"
 
 void updateWithArcadeDriving()
 {
 	if (!MOTOR_CONFIG.wheels.isEnabled) return;
+	writeDebugStreamLine("Updating driving");
 
 	int y = joystick.joy1_y1;
-	int x = joystick.joy2_x1;
+	int x = joystick.joy1_x2;
 
-	int maxPower = joystickToPower(y) * POWER_LIMIT_FACTOR;
-	float limit = abs(joystickToPower(x) / (float)POWER_MAX);
-	int sidePower = floor(maxPower * limit);
+	int power = joystickToPower(y) * POWER_LIMIT_FACTOR;
+	HorizontalDirection direction = getHorizontalDirection(x);
 
-
-	switch (getHorizontalDirection(x)) {
-		case CENTER:
-			motor[MOTOR_CONFIG.wheels.frontRight] = 0;
-			motor[MOTOR_CONFIG.wheels.backRight] = 0;
-			motor[MOTOR_CONFIG.wheels.frontLeft] = 0;
-			motor[MOTOR_CONFIG.wheels.backLeft] = 0;
-			break;
-		case RIGHT:
-			motor[MOTOR_CONFIG.wheels.frontRight] = sidePower;
-			motor[MOTOR_CONFIG.wheels.backRight] = sidePower;
-			motor[MOTOR_CONFIG.wheels.frontLeft] = 0;
-			motor[MOTOR_CONFIG.wheels.backLeft] = 0;
-			break;
-		case LEFT:
-			motor[MOTOR_CONFIG.wheels.frontRight] = 0;
-			motor[MOTOR_CONFIG.wheels.backRight] = 0;
-			motor[MOTOR_CONFIG.wheels.frontLeft] = sidePower;
-			motor[MOTOR_CONFIG.wheels.backLeft] = sidePower;
-			break;
+	if (isInDeadzone(x) && isInDeadzone(y)) {
+		stopWheels();
+		return;
 	}
+
+	drive(direction, power);
 }
 
 void updateWithTankDriving()
