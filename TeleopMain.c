@@ -37,7 +37,7 @@ void config()
 	MOTOR_CONFIG.wheels.isEnabled	= true;
 
 	MOTOR_CONFIG.flag.id			= servoFlag;
-	MOTOR_CONFIG.flag.isEnabled		= false;
+	MOTOR_CONFIG.flag.isEnabled		= true;
 
 	MOTOR_CONFIG.buckets.left		= NO_MOTOR;
 	MOTOR_CONFIG.buckets.right		= servoBucketRight;

@@ -41,13 +41,18 @@ void doJoystickUpdate()
 {
 	writeDebugStreamLine("Joystick Update Fired");
 	joystickDebugDisplay();
+	if(!isButtonDown(BUTTON_CONFIG.flag))
+		servo[servoFlag] = 0;
 
-	if (MOTOR_CONFIG.wheels.isEnabled) {
+	if (MOTOR_CONFIG.wheels.isEnabled)
 		updateDriving();
-	}
-	if (MOTOR_CONFIG.lift.isEnabled) {
+
+	if (MOTOR_CONFIG.lift.isEnabled)
 		updateLift();
-	}
+
+	if(MOTOR_CONFIG.flag.isEnabled)
+		updateFlag();
+
 }
 
 void updateDriving()
@@ -82,4 +87,14 @@ void updateLift()
 
 		return;
 	}
+}
+
+void updateFlag()
+{
+	if(!MOTOR_CONFIG.flag.isEnabled) return;
+
+	if(isButtonDown(BUTTON_CONFIG.flag))
+		servo[servoFlag] = FLAG_POWER;
+
+	else servo[servoFlag] = 0;
 }
