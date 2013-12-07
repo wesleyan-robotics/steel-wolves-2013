@@ -30,7 +30,8 @@ task joystickListener()
 {
 	initJoystick();
 
-	while(true) {
+	while(true)
+	{
 		wait1Msec(LOOP_DELAY_TIME);
 		getJoystickSettings(joystick);
 		doJoystickUpdate();
@@ -42,11 +43,19 @@ void doJoystickUpdate()
 	writeDebugStreamLine("Joystick Update Fired");
 	joystickDebugDisplay();
 
-	if (MOTOR_CONFIG.wheels.isEnabled) {
+	if (MOTOR_CONFIG.wheels.isEnabled)
+	{
 		updateDriving();
 	}
-	if (MOTOR_CONFIG.lift.isEnabled) {
+
+	if (MOTOR_CONFIG.lift.isEnabled)
+	{
 		updateLift();
+	}
+
+	if (MOTOR_CONFIG.auxiliaryLift.isEnabled)
+	{
+		updateAuxiliaryLift();
 	}
 }
 
@@ -61,12 +70,15 @@ void updateLift()
 {
 	if (!MOTOR_CONFIG.lift.isEnabled) return;
 
-	if (isButtonDown(BUTTON_CONFIG.liftUp)) {
+	if (isButtonDown(BUTTON_CONFIG.liftUp))
+	{
 		motor[MOTOR_CONFIG.lift.left] = LIFT_POWER;
 		motor[MOTOR_CONFIG.lift.right] = LIFT_POWER;
 		return;
 	}
-	if (isButtonDown(BUTTON_CONFIG.liftDown)) {
+
+	if (isButtonDown(BUTTON_CONFIG.liftDown))
+	{
 		motor[MOTOR_CONFIG.lift.left] = -LIFT_POWER;
 		motor[MOTOR_CONFIG.lift.right] = -LIFT_POWER;
 		return;
@@ -74,12 +86,27 @@ void updateLift()
 
 	motor[MOTOR_CONFIG.lift.left] = 0;
 	motor[MOTOR_CONFIG.lift.right] = 0;
-	if (isButtonDown(BUTTON_CONFIG.auxiliaryLift)) {
-		servo[MOTOR_CONFIG.lift.auxiliaryLift] = 100;
-		return;
-	} else {
-		servo[MOTOR_CONFIG.lift.auxiliaryLift] = 0;
+}
 
+void updateAuxiliaryLift()
+{
+	if (!MOTOR_CONFIG.auxiliaryLift.isEnabled) return;
+
+	if (isButtonDown(BUTTON_CONFIG.auxiliaryLift))
+	{
+		servo[MOTOR_CONFIG.auxiliaryLift.id] = 100;
 		return;
+	}
+	
+	servo[MOTOR_CONFIG.auxiliaryLift.id] = 0;
+}
+
+void updateFlag()
+{
+	if (!MOTOR_CONFIG.flag.isEnabled) return;
+
+	if (isButtonDown(BUTTON_CONFIG.flag))
+	{
+		servo[MOTOR_CONFIG.flag]
 	}
 }

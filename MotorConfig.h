@@ -1,35 +1,53 @@
 #pragma once
 
-typedef struct {
-	int frontLeft;
-	int frontRight;
-	int backLeft;
-	int backRight;
+typedef enum
+{
+	INVALID,
+	MOTOR,
+	SERVO
+} MotorType;
+
+typedef struct
+{
+	int id;
+	MotorType type;
 	bool isEnabled;
+} MotorConfigDef;
+
+typedef struct
+{
+	MotorConfigDef frontLeft;
+	MotorConfigDef frontRight;
+	MotorConfigDef backLeft;
+	MotorConfigDef backRight;
 } WheelConfig;
 
-typedef struct {
-	int id;
-	bool isEnabled;
-} FlagConfig;
-
-typedef struct {
-	int left;
-	int right;
-	int auxiliaryLift;
+typedef struct
+{
+	MotorConfigDef left;
+	MotorConfigDef right;
 	bool isEnabled;
 } LiftConfig;
 
-typedef struct {
-	int left;
-	int right;
+typedef struct
+{
+	MotorConfigDef id
+	bool isEnabled;
+} AuxiliaryLiftConfig;
+
+typedef struct
+{
+	MotorConfigDef left;
+	MotorConfigDef right;
 	bool isEnabled;
 } BucketConfig;
 
-typedef struct {
+typedef struct
+{
 	WheelConfig wheels;
 	LiftConfig lift;
-	FlagConfig flag;
+	MotorConfigDef flag;
+	AuxiliaryLiftConfig auxiliaryLift;
 	BucketConfig buckets;
 } MotorConfig;
 

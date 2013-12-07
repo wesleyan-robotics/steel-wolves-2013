@@ -4,15 +4,13 @@
 
 void initializeRobot()
 {
-  return;
+	return;
 }
 
 task main()
 {
-  initializeRobot();
+	initializeRobot();
+ 	waitForStart();
 
-  waitForStart();
-
-  while (true)
-  {}
+	while (true);
 }

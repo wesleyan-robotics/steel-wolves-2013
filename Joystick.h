@@ -10,4 +10,5 @@ task joystickListener();
 void doJoystickUpdate();
 void updateDriving();
 void updateLift();
+void updateAuxiliaryLift();
 void updateFlag();
