@@ -36,3 +36,5 @@ typedef struct {
 const int NO_MOTOR = 0;
 
 MotorConfig MOTOR_CONFIG;
+
+void globalMotorConfig();

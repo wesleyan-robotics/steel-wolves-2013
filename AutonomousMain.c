@@ -13,23 +13,14 @@
 #pragma config(Servo,  srvo_S1_C4_5,    servoSideAndSideMoveyThing, tServoContinuousRotation)
 #pragma config(Servo,  srvo_S1_C4_6,    servo6,               tServoNone)
 
-#include "Config.c"
-#include "JoystickDriver.c"
-#include "Math.h"
-
-void initializeRobot()
-{
-  return;
-}
+#include "ProgramIncludes.h"
 
 task main()
 {
-  initializeRobot();
+    globalMotorConfig();
+    waitForStart();
 
-  waitForStart();
-
-  motor[motorWheelBackLeft] = motor[motorWheelBackRight] = motor[motorWheelFrontLeft] = motor[MotorWheelFrontRight] = -100;
-  wait1Msec(6500);
-  motor[motorWheelBackLeft] = motor[motorWheelBackRight] = motor[motorWheelFrontLeft] = motor[MotorWheelFrontRight] = 0;
-
+    motor[motorWheelBackLeft] = motor[motorWheelBackRight] = motor[motorWheelFrontLeft] = motor[MotorWheelFrontRight] = -100;
+    wait1Msec(6500);
+    motor[motorWheelBackLeft] = motor[motorWheelBackRight] = motor[motorWheelFrontLeft] = motor[MotorWheelFrontRight] = 0;
 }
