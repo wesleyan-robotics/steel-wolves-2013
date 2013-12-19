@@ -61,8 +61,8 @@ const int WHEEL_GROUP_LEN = 5;
 
 typedef enum
 {
-	LEFT = 0,
-    RIGHT = 1
+	MOTOR_LEFT = 0,
+    MOTOR_RIGHT = 1
 } SideGroupID;
 
 const int SIDE_GROUP_LEN = 3;

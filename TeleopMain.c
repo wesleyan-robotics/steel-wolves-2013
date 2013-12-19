@@ -26,8 +26,8 @@
 
 void config()
 {
-	CONFIG_MOTOR(liftGroup[LEFT], motorLiftLeft, TYPE_MOTOR, true)
-	CONFIG_MOTOR(liftGroup[RIGHT], motorLiftRight, TYPE_MOTOR, true)
+	CONFIG_MOTOR(liftGroup[MOTOR_LEFT], motorLiftLeft, TYPE_MOTOR, true)
+	CONFIG_MOTOR(liftGroup[MOTOR_RIGHT], motorLiftRight, TYPE_MOTOR, true)
 
 	CONFIG_MOTOR(auxiliaryLift, servoAuxLift, TYPE_SERVO, true)
 
@@ -38,8 +38,8 @@ void config()
 
     CONFIG_MOTOR(flag, servoFlag, TYPE_SERVO, true)
 
-    CONFIG_MOTOR(bucketGroup[LEFT], NO_MOTOR_ID, TYPE_INVALID, false)
-    CONFIG_MOTOR(bucketGroup[RIGHT], servoBucketRight, TYPE_SERVO, true)
+    CONFIG_MOTOR(bucketGroup[MOTOR_LEFT], NO_MOTOR_ID, TYPE_INVALID, false)
+    CONFIG_MOTOR(bucketGroup[MOTOR_RIGHT], servoBucketRight, TYPE_SERVO, true)
 }
 
 task main()
