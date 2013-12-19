@@ -1,12 +1,6 @@
 #pragma once
 #include "MotorConfig.h"
 
-// Loops through a motor group assuming that there is a NULL MotorConfigDef at
-// the end of the array.
-// Use `MOTOR_INDEX` to get the current index in the array
-#define FOREACH_MOTOR_IN_GROUP(array)  \
-    for (int MOTOR_INDEX = 0; array[MOTOR_INDEX].id != NO_MOTOR_ID; MOTOR_INDEX++)
-
 void setPower(MotorConfigDef *def, int power)
 {
 	if (!def->isEnabled) return;
@@ -45,7 +39,7 @@ void setGroupPower(MotorConfigDef *group, int power)
 {
     FOREACH_MOTOR_IN_GROUP(group)
     {
-        setPower(&group[MOTOR_INDEX], power);
+        setPower(&group[INDEX], power);
     }
 }
 
@@ -53,7 +47,7 @@ void enableGroup(MotorConfigDef *group)
 {
     FOREACH_MOTOR_IN_GROUP(group)
     {
-        group[MOTOR_INDEX].isEnabled = true;
+        group[INDEX].isEnabled = true;
     }
 }
 
@@ -61,7 +55,7 @@ void disableGroup(MotorConfigDef *group)
 {
     FOREACH_MOTOR_IN_GROUP(group)
     {
-        group[MOTOR_INDEX].isEnabled = false;
+        group[INDEX].isEnabled = false;
     }
 }
 
@@ -71,7 +65,7 @@ bool isGroupEnabled(MotorConfigDef *group)
 
     FOREACH_MOTOR_IN_GROUP(group)
     {
-        isEnabled = isEnabled && group[MOTOR_INDEX].isEnabled;
+        isEnabled = isEnabled && group[INDEX].isEnabled;
     }
 
     return isEnabled;

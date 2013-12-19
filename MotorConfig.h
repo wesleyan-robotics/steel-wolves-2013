@@ -1,20 +1,35 @@
 #pragma once
 
 /*  Descrption:
-      The `CONFIG_MOTOR` macro allows of having a nice short hand notation for
-      doing the motor config section of code without having to repeatedly type
-      `MOTOR_CONFIG` all over the place. This also keeps from having to
-      repeatedly set the `def.id`, `def.type`, `def.isEnabled` for each motor.
+        The `CONFIG_MOTOR` macro allows of having a short hand notation for
+        setting up the motor config section of code without having to be
+        repetetive.
     Usage:
-      CONFIG_MOTOR(MotorConfigDef def, int motorIndex, MotorType type, bool isEnabled)
+        CONFIG_MOTOR(MotorConfigDef def, int motorIndex, MotorType type, bool isEnabled)
     Examples:
-      CONFIG_MOTOR(flag, servoFlag, SERVO, true)
-      CONFIG_MOTOR(wheelGroup[FRONT_LEFT], motorWheelFrontLeft, MOTOR, true)
+        CONFIG_MOTOR(flag, servoFlag, SERVO, true)
+        CONFIG_MOTOR(wheelGroup[FRONT_LEFT], motorWheelFrontLeft, MOTOR, true)
 */
 #define CONFIG_MOTOR(def, __id, __type, __isEnabled) \
     MOTOR_CONFIG.def.id = __id; \
     MOTOR_CONFIG.def.type = __type; \
     MOTOR_CONFIG.def.isEnabled = __isEnabled;
+    
+/*  Descrption:
+        Loops through a motor group assuming that there is a `NULL`
+        `MotorConfigDef` the end of the array.
+    Usage:
+        Use `FOREACH_MOTOR_IN_GROUP` as the for loop and `INDEX` to get the
+        current index in the array
+    Example:
+        MotorConfigDef *group = MOTOR_CONFIG.wheelGroup;
+        FOREACH_MOTOR_IN_GROUP(group)
+        {
+            group[INDEX].isEnabled = false;
+        }
+*/
+#define FOREACH_MOTOR_IN_GROUP(array)  \
+    for (int INDEX = 0; array[INDEX].id != NO_MOTOR_ID; INDEX++)
 
 typedef enum
 {

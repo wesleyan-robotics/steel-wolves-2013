@@ -4,9 +4,9 @@
 
 bool isButtonDown(ButtonConfigDef def)
 {
-	if (def.refType == INVALID) return false;
+	if (def.type == INVALID) return false;
 
-	if (def.refType == DPAD)
+	if (def.type == DPAD)
 	{
 		if (def.joystickIndex == INVALID) return false;
 
@@ -25,7 +25,7 @@ bool isButtonDown(ButtonConfigDef def)
 		return false;
 	}
 
-	if (def.refType == BUTTONS)
+	if (def.type == BUTTON)
 	{
 		if (def.joystickIndex == INVALID) return false;
 

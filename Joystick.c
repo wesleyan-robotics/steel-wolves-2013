@@ -9,21 +9,10 @@
 
 void initJoystick()
 {
-	BUTTON_CONFIG.liftUp.button			= DPAD_UP;
-	BUTTON_CONFIG.liftUp.joystickIndex	= JOYSTICK_1;
-	BUTTON_CONFIG.liftUp.refType		= DPAD;
-
-	BUTTON_CONFIG.liftDown.button			= DPAD_DOWN;
-	BUTTON_CONFIG.liftDown.joystickIndex	= JOYSTICK_1;
-	BUTTON_CONFIG.liftDown.refType			= DPAD;
-
-	BUTTON_CONFIG.auxiliaryLift.button			= BUTTON_Y;
-	BUTTON_CONFIG.auxiliaryLift.joystickIndex	= JOYSTICK_1;
-	BUTTON_CONFIG.auxiliaryLift.refType			= BUTTONS;
-
-	BUTTON_CONFIG.flag.button			= BUTTON_A;
-	BUTTON_CONFIG.flag.joystickIndex	= JOYSTICK_1;
-	BUTTON_CONFIG.flag.refType			= BUTTONS;
+    CONFIG_BUTTON(liftUp, JOYSTICK_1, DPAD, DPAD_UP)
+    CONFIG_BUTTON(liftDown, JOYSTICK_1, DPAD, DPAD_DOWN)
+    CONFIG_BUTTON(auxiliaryLift, JOYSTICK_1, BUTTON, BUTTON_Y)
+    CONFIG_BUTTON(flag, JOYSTICK_1, BUTTON, BUTTON_A)
 }
 
 task joystickListener()

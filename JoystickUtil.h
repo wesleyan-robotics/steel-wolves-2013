@@ -21,7 +21,7 @@ typedef enum {
 	BUTTON_RT = 7,
 	BUTTON_BACK = 8,
 	BUTTON_START = 9
-} JoystickButtons;
+} JoystickButton;
 
 typedef enum {
 	HDIR_CENTER,
