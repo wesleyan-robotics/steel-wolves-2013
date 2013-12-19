@@ -5,13 +5,13 @@ void setPower(MotorConfigDef *def, int power)
 {
 	if (!def->isEnabled) return;
 
-	if (def->type == MOTOR)
+	if (def->type == TYPE_MOTOR)
 	{
 		motor[def->id] = power;
 		return;
 	}
 
-	if (def->type == SERVO)
+	if (def->type == TYPE_SERVO)
 	{
 		servo[def->id] = power;
 		return;
@@ -22,12 +22,12 @@ int getPower(MotorConfigDef *def)
 {
 	if (!def->isEnabled) return 0;
 
-	if (def->type == MOTOR)
+	if (def->type == TYPE_MOTOR)
 	{
 		return motor[def->id];
 	}
 
-	if (def->type == SERVO)
+	if (def->type == TYPE_SERVO)
 	{
 		return servo[def->id];
 	}

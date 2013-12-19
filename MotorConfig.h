@@ -10,8 +10,8 @@
     Usage:
         CONFIG_MOTOR(MotorConfigDef def, int motorIndex, MotorType type, bool isEnabled)
     Examples:
-        CONFIG_MOTOR(flag, servoFlag, SERVO, true)
-        CONFIG_MOTOR(wheelGroup[FRONT_LEFT], motorWheelFrontLeft, MOTOR, true)
+        CONFIG_MOTOR(flag, servoFlag, TYPE_SERVO, true)
+        CONFIG_MOTOR(wheelGroup[FRONT_LEFT], motorWheelFrontLeft, TYPE_MOTOR, true)
 */
 #define CONFIG_MOTOR(def, __id, __type, __isEnabled) \
     MOTOR_CONFIG.def.id = __id; \
@@ -36,9 +36,9 @@
 
 typedef enum
 {
-	INVALID,
-	MOTOR,
-	SERVO
+	TYPE_INVALID,
+	TYPE_MOTOR,
+	TYPE_SERVO
 } MotorType;
 
 typedef struct

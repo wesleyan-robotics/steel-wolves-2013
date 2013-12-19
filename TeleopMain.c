@@ -26,20 +26,20 @@
 
 void config()
 {
-	CONFIG_MOTOR(liftGroup[LEFT], motorLiftLeft, MOTOR, true)
-	CONFIG_MOTOR(liftGroup[RIGHT], motorLiftRight, MOTOR, true)
+	CONFIG_MOTOR(liftGroup[LEFT], motorLiftLeft, TYPE_MOTOR, true)
+	CONFIG_MOTOR(liftGroup[RIGHT], motorLiftRight, TYPE_MOTOR, true)
 
-	CONFIG_MOTOR(auxiliaryLift, servoAuxLift, SERVO, true)
+	CONFIG_MOTOR(auxiliaryLift, servoAuxLift, TYPE_SERVO, true)
 
-    CONFIG_MOTOR(wheelGroup[FRONT_LEFT], motorWheelFrontLeft, MOTOR, true)
-	CONFIG_MOTOR(wheelGroup[FRONT_RIGHT], motorWheelFrontRight, MOTOR, true)
-	CONFIG_MOTOR(wheelGroup[BACK_LEFT], motorWheelBackLeft, MOTOR, true)
-	CONFIG_MOTOR(wheelGroup[BACK_RIGHT], motorWheelBackRight, MOTOR, true)
+    CONFIG_MOTOR(wheelGroup[FRONT_LEFT], motorWheelFrontLeft, TYPE_MOTOR, true)
+	CONFIG_MOTOR(wheelGroup[FRONT_RIGHT], motorWheelFrontRight, TYPE_MOTOR, true)
+	CONFIG_MOTOR(wheelGroup[BACK_LEFT], motorWheelBackLeft, TYPE_MOTOR, true)
+	CONFIG_MOTOR(wheelGroup[BACK_RIGHT], motorWheelBackRight, TYPE_MOTOR, true)
 
-    CONFIG_MOTOR(flag, servoFlag, SERVO, true)
+    CONFIG_MOTOR(flag, servoFlag, TYPE_SERVO, true)
 
-    CONFIG_MOTOR(bucketGroup[LEFT], NO_MOTOR_ID, INVALID, false)
-    CONFIG_MOTOR(bucketGroup[RIGHT], servoBucketRight, SERVO, true)
+    CONFIG_MOTOR(bucketGroup[LEFT], NO_MOTOR_ID, TYPE_INVALID, false)
+    CONFIG_MOTOR(bucketGroup[RIGHT], servoBucketRight, TYPE_SERVO, true)
 }
 
 task main()
