@@ -4,11 +4,14 @@
         The `CONFIG_BUTTON` macro allows of having a short hand notation for
         setting up the button config section of code without having to be
         repetetive.
+        
+        Note: All `ButtonConfigDef`s that are being refrenced must be already
+        defined in the `BUTTON_CONFIG` struct
     Usage:
-        CONFIG_BUTTON(JoystickDPad button, JoystickIndex index, ButtonType type)
+        CONFIG_BUTTON(ButtonConfigDef def, JoystickIndex index, ButtonType type, JoystickDPad button)
     Examples:
-        CONFIG_MOTOR(flag, servoFlag, SERVO, true)
-        CONFIG_MOTOR(wheelGroup[FRONT_LEFT], motorWheelFrontLeft, MOTOR, true)
+        CONFIG_BUTTON(auxiliaryLift, JOYSTICK_1, BUTTON, BUTTON_Y)
+        CONFIG_BUTTON(flag, JOYSTICK_1, BUTTON, BUTTON_A)
 */
 #define CONFIG_BUTTON(name, __index, __type, __button) \
     BUTTON_CONFIG.name.button = __button; \

@@ -4,6 +4,9 @@
         The `CONFIG_MOTOR` macro allows of having a short hand notation for
         setting up the motor config section of code without having to be
         repetetive.
+        
+        Note: All `MotorConfigDef`s that are being refrenced must be already
+        defined in the `MOTOR_CONFIG` struct
     Usage:
         CONFIG_MOTOR(MotorConfigDef def, int motorIndex, MotorType type, bool isEnabled)
     Examples:
