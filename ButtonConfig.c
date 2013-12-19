@@ -40,7 +40,7 @@ bool isButtonDown(ButtonConfigDef def)
 			writeDebugStreamLine("BUTTONS");
 			return joy2Btn(def.button) == BUTTON_DOWN;
 		}
-		
+
 		return false;
 	}
 

@@ -43,12 +43,12 @@ void doJoystickUpdate()
 	writeDebugStreamLine("Joystick Update Fired");
 	joystickDebugDisplay();
 
-	if (MOTOR_CONFIG.wheels.isEnabled)
+	if (isGroupEnabled(MOTOR_CONFIG.wheelGroup))
 	{
 		updateDriving();
 	}
 
-	if (MOTOR_CONFIG.lift.isEnabled)
+	if (isGroupEnabled(MOTOR_CONFIG.liftGroup))
 	{
 		updateLift();
 	}
@@ -61,31 +61,28 @@ void doJoystickUpdate()
 
 void updateDriving()
 {
-	if (!MOTOR_CONFIG.wheels.isEnabled) return;
+	if (!isGroupEnabled(MOTOR_CONFIG.wheelGroup)) return;
 
 	updateWithArcadeDriving();
 }
 
 void updateLift()
 {
-	if (!MOTOR_CONFIG.lift.isEnabled) return;
+	if (!isGroupEnabled(MOTOR_CONFIG.liftGroup)) return;
 
 	if (isButtonDown(BUTTON_CONFIG.liftUp))
 	{
-		motor[MOTOR_CONFIG.lift.left] = LIFT_POWER;
-		motor[MOTOR_CONFIG.lift.right] = LIFT_POWER;
+		setGroupPower(MOTOR_CONFIG.liftGroup, LIFT_POWER);
 		return;
 	}
 
 	if (isButtonDown(BUTTON_CONFIG.liftDown))
 	{
-		motor[MOTOR_CONFIG.lift.left] = -LIFT_POWER;
-		motor[MOTOR_CONFIG.lift.right] = -LIFT_POWER;
+		setGroupPower(MOTOR_CONFIG.liftGroup, -LIFT_POWER);
 		return;
 	}
 
-	motor[MOTOR_CONFIG.lift.left] = 0;
-	motor[MOTOR_CONFIG.lift.right] = 0;
+	setGroupPower(MOTOR_CONFIG.liftGroup, 0);
 }
 
 void updateAuxiliaryLift()
@@ -94,11 +91,11 @@ void updateAuxiliaryLift()
 
 	if (isButtonDown(BUTTON_CONFIG.auxiliaryLift))
 	{
-		servo[MOTOR_CONFIG.auxiliaryLift.id] = 100;
+		setPower(MOTOR_CONFIG.auxiliaryLift, 100);
 		return;
 	}
-	
-	servo[MOTOR_CONFIG.auxiliaryLift.id] = 0;
+
+	setPower(MOTOR_CONFIG.auxiliaryLift, 0);
 }
 
 void updateFlag()
@@ -107,6 +104,6 @@ void updateFlag()
 
 	if (isButtonDown(BUTTON_CONFIG.flag))
 	{
-		servo[MOTOR_CONFIG.flag]
+		setPower(MOTOR_CONFIG.flag, FLAG_POWER);
 	}
 }

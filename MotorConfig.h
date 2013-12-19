@@ -1,5 +1,21 @@
 #pragma once
 
+/*  Descrption:
+      The `CONFIG_MOTOR` macro allows of having a nice short hand notation for
+      doing the motor config section of code without having to repeatedly type
+      `MOTOR_CONFIG` all over the place. This also keeps from having to
+      repeatedly set the `def.id`, `def.type`, `def.isEnabled` for each motor.
+    Usage:
+      CONFIG_MOTOR(MotorConfigDef def, int motorIndex, MotorType type, bool isEnabled)
+    Examples:
+      CONFIG_MOTOR(flag, servoFlag, SERVO, true)
+      CONFIG_MOTOR(wheelGroup[FRONT_LEFT], motorWheelFrontLeft, MOTOR, true)
+*/
+#define CONFIG_MOTOR(def, __id, __type, __isEnabled) \
+    MOTOR_CONFIG.def.id = __id; \
+    MOTOR_CONFIG.def.type = __type; \
+    MOTOR_CONFIG.def.isEnabled = __isEnabled;
+
 typedef enum
 {
 	INVALID,
@@ -14,43 +30,41 @@ typedef struct
 	bool isEnabled;
 } MotorConfigDef;
 
-typedef struct
+typedef enum
 {
-	MotorConfigDef frontLeft;
-	MotorConfigDef frontRight;
-	MotorConfigDef backLeft;
-	MotorConfigDef backRight;
-} WheelConfig;
+	FRONT_LEFT  = 0,
+    FRONT_RIGHT = 1,
+    BACK_LEFT   = 2,
+    BACK_RIGHT  = 3
+} WheelGroupID;
+
+// Note: All the lengths are +1 since we want a NULL terminator
+const int WHEEL_GROUP_LEN = 5;
+
+typedef enum
+{
+	LEFT = 0,
+    RIGHT = 1
+} SideGroupID;
+
+const int SIDE_GROUP_LEN = 3;
 
 typedef struct
 {
-	MotorConfigDef left;
-	MotorConfigDef right;
-	bool isEnabled;
-} LiftConfig;
-
-typedef struct
-{
-	MotorConfigDef id
-	bool isEnabled;
-} AuxiliaryLiftConfig;
-
-typedef struct
-{
-	MotorConfigDef left;
-	MotorConfigDef right;
-	bool isEnabled;
-} BucketConfig;
-
-typedef struct
-{
-	WheelConfig wheels;
-	LiftConfig lift;
-	MotorConfigDef flag;
-	AuxiliaryLiftConfig auxiliaryLift;
-	BucketConfig buckets;
+    MotorConfigDef liftGroup[SIDE_GROUP_LEN];
+    MotorConfigDef bucketGroup[SIDE_GROUP_LEN];
+    MotorConfigDef wheelGroup[WHEEL_GROUP_LEN];
+    MotorConfigDef auxiliaryLift;
+    MotorConfigDef flag;
 } MotorConfig;
 
-const int NO_MOTOR = 0;
+const int NO_MOTOR_ID = -1;
 
 MotorConfig MOTOR_CONFIG;
+
+int getPower(MotorConfigDef *def);
+void setPower(MotorConfigDef *def, int power);
+void setGroupPower(MotorConfigDef *group, int power);
+void enableGroup(MotorConfigDef *group);
+void disableGroup(MotorConfigDef *group);
+bool isGroupEnabled(MotorConfigDef *group);

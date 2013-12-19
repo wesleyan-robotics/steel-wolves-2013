@@ -22,46 +22,32 @@
 #include "DrivingModes.c"
 #include "MotorUtil.c"
 #include "ButtonConfig.c"
+#include "MotorConfig.c"
 
 void config()
 {
-	// TODO: What we want to do is be able to "register" each of these motor
-	//       groups by adding them to an array so that they can be managed at
-	//       same time so that we can have something like:
-	//           `void setGroupPower(Array group, int power)`
-	//       This removes the need for having too keep making `setWheelPower()`
-	//		 functions for example and instead allow for just one function that
-	//       take groups instead
-	MOTOR_CONFIG.lift.left.id		= motorLiftLeft;
-	MOTOR_CONFIG.lift.left.type		= MOTOR;
-	MOTOR_CONFIG.lift.right.id		= motorLiftRight;
-	MOTOR_CONFIG.lift.right.type	= MOTOR;
-	MOTOR_CONFIG.lift.isEnabled		= true;
+	CONFIG_MOTOR(liftGroup[LEFT], motorLiftLeft, MOTOR, true)
+	CONFIG_MOTOR(liftGroup[RIGHT], motorLiftRight, MOTOR, true)
 
-	MOTOR_CONFIG.auxiliaryLift.id			= servoAuxLift;
-	MOTOR_CONFIG.auxiliaryLift.type			= SERVO;
-	MOTOR_CONFIG.auxiliaryLift.isEnabled 	= true;
+	CONFIG_MOTOR(auxiliaryLift, servoAuxLift, SERVO, true)
 
-	MOTOR_CONFIG.wheels.frontLeft.id	= motorWheelFrontLeft;
-	MOTOR_CONFIG.wheels.frontLeft.type	= MOTOR;
-	MOTOR_CONFIG.wheels.frontRight.id	= motorWheelFrontRight;
-	MOTOR_CONFIG.wheels.backLeft.type	= MOTOR;
-	MOTOR_CONFIG.wheels.backRight.id	= motorWheelBackRight;
-	MOTOR_CONFIG.wheels.backRight.type	= MOTOR;
-	MOTOR_CONFIG.wheels.isEnabled	= true;
+    CONFIG_MOTOR(wheelGroup[FRONT_LEFT], motorWheelFrontLeft, MOTOR, true)
+	CONFIG_MOTOR(wheelGroup[FRONT_RIGHT], motorWheelFrontRight, MOTOR, true)
+	CONFIG_MOTOR(wheelGroup[BACK_LEFT], motorWheelBackLeft, MOTOR, true)
+	CONFIG_MOTOR(wheelGroup[BACK_RIGHT], motorWheelBackRight, MOTOR, true)
 
-	MOTOR_CONFIG.flag.id			= servoFlag;
-	MOTOR_CONFIG.flag.isEnabled		= false;
+    CONFIG_MOTOR(flag, servoFlag, SERVO, true)
 
-	MOTOR_CONFIG.buckets.left		= NO_MOTOR;
-	MOTOR_CONFIG.buckets.right		= servoBucketRight;
-	MOTOR_CONFIG.buckets.isEnabled  = false;
+    CONFIG_MOTOR(bucketGroup[LEFT], NO_MOTOR_ID, INVALID, false)
+    CONFIG_MOTOR(bucketGroup[RIGHT], servoBucketRight, SERVO, true)
 }
 
 task main()
 {
 	config();
 	waitForStart();
+
+	return;
 	StartTask(joystickListener);
 
 	while (true);

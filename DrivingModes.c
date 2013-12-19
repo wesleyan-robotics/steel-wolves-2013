@@ -7,7 +7,7 @@
 
 void updateWithArcadeDriving()
 {
-	if (!MOTOR_CONFIG.wheels.isEnabled) return;
+	if (!isGroupEnabled(MOTOR_CONFIG.wheelGroup)) return;
 	writeDebugStreamLine("Updating driving");
 
 	int y = joystick.joy1_y1;
@@ -26,13 +26,13 @@ void updateWithArcadeDriving()
 
 void updateWithTankDriving()
 {
-	if (!MOTOR_CONFIG.wheels.isEnabled) return;
+	if (!isGroupEnabled(MOTOR_CONFIG.wheelGroup)) return;
 
 	int leftPower = joystickToPower(joystick.joy1_y1);
 	int rightPower = joystickToPower(joystick.joy1_y2);
 
-	motor[MOTOR_CONFIG.wheels.frontLeft] = leftPower;
-	motor[MOTOR_CONFIG.wheels.backLeft] = leftPower;
-	motor[MOTOR_CONFIG.wheels.frontRight] = rightPower;
-	motor[MOTOR_CONFIG.wheels.backRight] = rightPower;
+	setPower(MOTOR_CONFIG.wheelGroup[FRONT_LEFT], leftPower);
+	setPower(MOTOR_CONFIG.wheelGroup[BACK_LEFT], leftPower);
+	setPower(MOTOR_CONFIG.wheelGroup[FRONT_RIGHT], rightPower);
+	setPower(MOTOR_CONFIG.wheelGroup[BACK_RIGHT], rightPower);
 }
