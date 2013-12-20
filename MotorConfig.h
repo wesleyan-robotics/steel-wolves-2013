@@ -1,40 +1,89 @@
 #pragma once
+#include "MotorConfig.h"
 
-typedef struct {
-	int frontLeft;
-	int frontRight;
-	int backLeft;
-	int backRight;
-	bool isEnabled;
-} WheelConfig;
+/*  Descrption:
+        The `CONFIG_MOTOR` macro allows of having a short hand notation for
+        setting up the motor config section of code without having to be
+        repetetive.
+        
+        Note: All `MotorConfigDef`s that are being refrenced must be already
+        defined in the `MOTOR_CONFIG` struct
+    Usage:
+        CONFIG_MOTOR(MotorConfigDef def, int motorIndex, MotorType type, bool isEnabled)
+    Examples:
+        CONFIG_MOTOR(flag, servoFlag, TYPE_SERVO, true)
+        CONFIG_MOTOR(wheelGroup[FRONT_LEFT], motorWheelFrontLeft, TYPE_MOTOR, true)
+*/
+#define CONFIG_MOTOR(def, __id, __type, __isEnabled) \
+    MOTOR_CONFIG.def.id = __id; \
+    MOTOR_CONFIG.def.type = __type; \
+    MOTOR_CONFIG.def.isEnabled = __isEnabled;
+    
+/*  Descrption:
+        Loops through a motor group assuming that there is a `NULL`
+        `MotorConfigDef` the end of the array.
+    Usage:
+        Use `FOREACH_MOTOR_IN_GROUP` as the for loop and `INDEX` to get the
+        current index in the array
+    Example:
+        MotorConfigDef *group = MOTOR_CONFIG.wheelGroup;
+        FOREACH_MOTOR_IN_GROUP(group)
+        {
+            group[INDEX].isEnabled = false;
+        }
+*/
+#define FOREACH_MOTOR_IN_GROUP(array)  \
+    for (int INDEX = 0; array[INDEX].id != NO_MOTOR_ID; INDEX++)
 
-typedef struct {
+typedef enum
+{
+	TYPE_INVALID,
+	TYPE_MOTOR,
+	TYPE_SERVO
+} MotorType;
+
+typedef struct
+{
 	int id;
+	MotorType type;
 	bool isEnabled;
-} FlagConfig;
+} MotorConfigDef;
 
-typedef struct {
-	int left;
-	int right;
-	int auxiliaryLift;
-	bool isEnabled;
-} LiftConfig;
+typedef enum
+{
+	FRONT_LEFT  = 0,
+    FRONT_RIGHT = 1,
+    BACK_LEFT   = 2,
+    BACK_RIGHT  = 3
+} WheelGroupID;
 
-typedef struct {
-	int left;
-	int right;
-	bool isEnabled;
-} BucketConfig;
+typedef enum
+{
+	MOTOR_LEFT = 0,
+    MOTOR_RIGHT = 1
+} SideGroupID;
 
-typedef struct {
-	WheelConfig wheels;
-	LiftConfig lift;
-	FlagConfig flag;
-	BucketConfig buckets;
+// Note: All the lengths are +1 since we want a NULL terminator
+const int WHEEL_GROUP_LEN = 5;
+const int SIDE_GROUP_LEN = 3;
+
+typedef struct
+{
+    MotorConfigDef liftGroup[SIDE_GROUP_LEN];
+    MotorConfigDef bucketGroup[SIDE_GROUP_LEN];
+    MotorConfigDef wheelGroup[WHEEL_GROUP_LEN];
+    MotorConfigDef auxiliaryLift;
+    MotorConfigDef flag;
 } MotorConfig;
 
-const int NO_MOTOR = 0;
+
+const int NO_MOTOR_ID = -1;
 
 MotorConfig MOTOR_CONFIG;
 
-void globalMotorConfig();
+int getPower(MotorConfigDef *def);
+void setPower(MotorConfigDef *def, int power);
+void setGroupPower(MotorConfigDef *group, int power);
+void enableGroup(MotorConfigDef *group);
+void disableGroup(MotorConfigDef *group);
+bool isGroupEnabled(MotorConfigDef *group);

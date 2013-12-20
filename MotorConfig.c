@@ -1,23 +1,72 @@
 #pragma once
 #include "MotorConfig.h"
 
-void globalMotorConfig()
+void setPower(MotorConfigDef *def, int power)
 {
-	MOTOR_CONFIG.lift.left			= motorLiftLeft;
-	MOTOR_CONFIG.lift.right			= motorLiftRight;
-	MOTOR_CONFIG.lift.auxiliaryLift	= servoAuxLift;
-	MOTOR_CONFIG.lift.isEnabled		= true;
+	if (!def->isEnabled) return;
 
-	MOTOR_CONFIG.wheels.frontLeft	= motorWheelFrontLeft;
-	MOTOR_CONFIG.wheels.frontRight	= motorWheelFrontRight;
-	MOTOR_CONFIG.wheels.backLeft	= motorWheelBackLeft;
-	MOTOR_CONFIG.wheels.backRight	= motorWheelBackRight;
-	MOTOR_CONFIG.wheels.isEnabled	= true;
+	if (def->type == TYPE_MOTOR)
+	{
+		motor[def->id] = power;
+		return;
+	}
 
-	MOTOR_CONFIG.flag.id			= servoFlag;
-	MOTOR_CONFIG.flag.isEnabled		= true;
+	if (def->type == TYPE_SERVO)
+	{
+		servo[def->id] = power;
+		return;
+	}
+}
 
-	MOTOR_CONFIG.buckets.left		= NO_MOTOR;
-	MOTOR_CONFIG.buckets.right		= servoBucketRight;
-	MOTOR_CONFIG.buckets.isEnabled  = false;
+int getPower(MotorConfigDef *def)
+{
+	if (!def->isEnabled) return 0;
+
+	if (def->type == TYPE_MOTOR)
+	{
+		return motor[def->id];
+	}
+
+	if (def->type == TYPE_SERVO)
+	{
+		return servo[def->id];
+	}
+
+    return 0;
+}
+
+void setGroupPower(MotorConfigDef *group, int power)
+{
+    FOREACH_MOTOR_IN_GROUP(group)
+    {
+        setPower(&group[INDEX], power);
+    }
+}
+
+void enableGroup(MotorConfigDef *group)
+{
+    FOREACH_MOTOR_IN_GROUP(group)
+    {
+        group[INDEX].isEnabled = true;
+    }
+}
+
+void disableGroup(MotorConfigDef *group)
+{
+    FOREACH_MOTOR_IN_GROUP(group)
+    {
+        group[INDEX].isEnabled = false;
+    }
+}
+
+bool isGroupEnabled(MotorConfigDef *group)
+{
+    bool isEnabled = true;
+
+    FOREACH_MOTOR_IN_GROUP(group)
+    {
+        isEnabled = isEnabled && group[INDEX].isEnabled;
+    }
+
+    return isEnabled;
 }

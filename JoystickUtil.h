@@ -21,18 +21,18 @@ typedef enum {
 	BUTTON_RT = 7,
 	BUTTON_BACK = 8,
 	BUTTON_START = 9
-} JoystickButtons;
+} JoystickButton;
 
 typedef enum {
-	CENTER,
-	LEFT,
-	RIGHT
+	HDIR_CENTER,
+	HDIR_LEFT,
+	HDIR_RIGHT
 } HorizontalDirection;
 
 typedef enum {
-	CENTER,
-	UP,
-	DOWN
+	VDIR_CENTER,
+	VDIR_UP,
+	VDIR_DOWN
 } VerticalDirection;
 
 const int POWER_MIN = 0;

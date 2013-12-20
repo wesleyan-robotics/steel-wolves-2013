@@ -1,51 +1,51 @@
 #pragma once
 #include "MotorUtil.h"
+#include "MotorConfig.h"
 
 void stopWheels()
 {
-	motor[MOTOR_CONFIG.wheels.frontRight]	= 0;
-	motor[MOTOR_CONFIG.wheels.backRight]	= 0;
-	motor[MOTOR_CONFIG.wheels.frontLeft]	= 0;
-	motor[MOTOR_CONFIG.wheels.backLeft]		= 0;
+	setGroupPower(MOTOR_CONFIG.wheelGroup, 0);
 }
 
 void setWheelPower(int power)
 {
-	motor[MOTOR_CONFIG.wheels.frontRight]	= power;
-	motor[MOTOR_CONFIG.wheels.backRight]	= power;
-	motor[MOTOR_CONFIG.wheels.frontLeft]	= power;
-	motor[MOTOR_CONFIG.wheels.backLeft]		= power;
+	setGroupPower(MOTOR_CONFIG.wheelGroup, power);
 }
 
 void turnWheelsRight(int power)
 {
-	motor[MOTOR_CONFIG.wheels.frontRight] = -power;
-	motor[MOTOR_CONFIG.wheels.backRight]  = -power;
-	motor[MOTOR_CONFIG.wheels.frontLeft]  = power;
-	motor[MOTOR_CONFIG.wheels.backLeft]   = power;
+	setPower(MOTOR_CONFIG.wheelGroup[FRONT_RIGHT], -power);
+	setPower(MOTOR_CONFIG.wheelGroup[BACK_RIGHT], -power);
+	setPower(MOTOR_CONFIG.wheelGroup[FRONT_LEFT], power);
+	setPower(MOTOR_CONFIG.wheelGroup[BACK_LEFT], power);
 }
 
 void turnWheelsLeft(int power)
 {
-	motor[MOTOR_CONFIG.wheels.frontRight] = power;
-	motor[MOTOR_CONFIG.wheels.backRight]  = power;
-	motor[MOTOR_CONFIG.wheels.frontLeft]  = -power;
-	motor[MOTOR_CONFIG.wheels.backLeft]   = -power;
+	setPower(MOTOR_CONFIG.wheelGroup[FRONT_RIGHT], power);
+	setPower(MOTOR_CONFIG.wheelGroup[BACK_RIGHT], power);
+	setPower(MOTOR_CONFIG.wheelGroup[FRONT_LEFT], -power);
+	setPower(MOTOR_CONFIG.wheelGroup[BACK_LEFT], -power);
 }
 
 void drive(HorizontalDirection direction, int power)
 {
-	if (direction == CENTER) {
+	if (direction == HDIR_CENTER)
+	{
 		writeDebugStreamLine("Center Direction");
 		setWheelPower(power);
 		return;
 	}
-	if (direction == RIGHT) {
+
+	if (direction == HDIR_RIGHT)
+	{
 		writeDebugStreamLine("Right Direction");
 		turnWheelsRight(power);
 		return;
 	}
-	if (direction == LEFT) {
+
+	if (direction == HDIR_LEFT)
+	{
 		writeDebugStreamLine("Left Direction");
 		turnWheelsLeft(power);
 		return;
@@ -54,12 +54,15 @@ void drive(HorizontalDirection direction, int power)
 
 void turnWheels(HorizontalDirection direction, int power)
 {
-	if (direction == RIGHT) {
+	if (direction == HDIR_RIGHT)
+	{
 		writeDebugStreamLine("Right Direction");
 		turnWheelsRight(power);
 		return;
 	}
-	if (direction == LEFT) {
+
+	if (direction == HDIR_LEFT)
+	{
 		writeDebugStreamLine("Left Direction");
 		turnWheelsLeft(power);
 		return;
