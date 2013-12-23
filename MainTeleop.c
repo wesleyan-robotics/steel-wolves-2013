@@ -20,7 +20,7 @@ task main()
 {
 	initMotorConfig();
 	waitForStart();
-	StartTask(joystickListener);
 
+	StartTask(joystickListener);
 	while (true);
 }
