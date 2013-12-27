@@ -1,6 +1,7 @@
 #pragma once
 #include "Joystick.h";
 
+#include "MotorConfig.h"
 #include "JoystickDriver.h"
 #include "JoystickUtil.h"
 #include "Math.h";
@@ -31,7 +32,11 @@ void doJoystickUpdate()
 {
 	writeDebugStreamLine("Joystick Update Fired");
 	joystickDebugDisplay();
-	
+
+	//writeDebugStreamLine("true = %d", true);
+	//writeDebugStreamLine("false = %d", false);
+	//writeDebugStreamLine("isGroupEnabled(MOTOR_CONFIG.wheelGroup) -> %d", isGroupEnabled(MOTOR_CONFIG.wheelGroup));
+
 	if (isGroupEnabled(MOTOR_CONFIG.wheelGroup))
 	{
 		updateDriving();
@@ -58,6 +63,7 @@ void updateDriving()
 	if (!isGroupEnabled(MOTOR_CONFIG.wheelGroup)) return;
 
 	updateWithArcadeDriving();
+	//updateWithTankDriving();
 }
 
 void updateLift()
@@ -101,6 +107,6 @@ void updateFlag()
 		setPower(MOTOR_CONFIG.flag, FLAG_POWER);
 		return;
 	}
-	
+
 	setPower(MOTOR_CONFIG.flag, 0);
 }

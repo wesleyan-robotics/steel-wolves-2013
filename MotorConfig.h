@@ -5,7 +5,7 @@
         The `CONFIG_MOTOR` macro allows of having a short hand notation for
         setting up the motor config section of code without having to be
         repetetive.
-        
+
         Note: All `MotorConfigDef`s that are being refrenced must be already
         defined in the `MOTOR_CONFIG` struct
     Usage:
@@ -18,7 +18,7 @@
     MOTOR_CONFIG.def.id = __id; \
     MOTOR_CONFIG.def.type = __type; \
     MOTOR_CONFIG.def.isEnabled = __isEnabled;
-    
+
 /*  Descrption:
         Loops through a motor group assuming that there is a `NULL`
         `MotorConfigDef` the end of the array.
@@ -33,7 +33,7 @@
         }
 */
 #define FOREACH_MOTOR_IN_GROUP(array)  \
-    for (int INDEX = 0; array[INDEX].id != NO_MOTOR_ID; INDEX++)
+    for (int INDEX = 0; array[INDEX].type != TYPE_INVALID; INDEX++)
 
 typedef enum
 {

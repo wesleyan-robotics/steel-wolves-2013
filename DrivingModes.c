@@ -1,6 +1,7 @@
 #pragma once
 #include "DrivingModes.h"
 
+#include "Joystick.h"
 #include "JoystickDriver.h"
 #include "JoystickUtil.h"
 #include "MotorUtil.h"
@@ -13,11 +14,18 @@ void updateWithArcadeDriving()
 	int y = joystick.joy1_y1;
 	int x = joystick.joy1_x2;
 
-	int power = joystickToPower(y) * POWER_LIMIT_FACTOR;
+	int power = joystickToPower(y);
 	HorizontalDirection direction = getHorizontalDirection(x);
 
-	if (isInDeadzone(x) && isInDeadzone(y)) {
+	if (isInDeadzone(x) && isInDeadzone(y))
+	{
 		stopWheels();
+		return;
+	}
+
+	if (isInDeadzone(x) && !isInDeadzone(y))
+	{
+		drive(direction, TURNING_POWER);
 		return;
 	}
 

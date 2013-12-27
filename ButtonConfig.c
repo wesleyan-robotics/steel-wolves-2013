@@ -2,6 +2,8 @@
 #include "ButtonConfig.h"
 #include "JoystickDriver.h"
 
+#define EMULATOR_TARGET  (defined(NXT) || defined(TETRIX)) && defined(_Target_Emulator_)
+
 bool isButtonDown(ButtonConfigDef def)
 {
 	if (def.type == INVALID) return false;
@@ -16,11 +18,13 @@ bool isButtonDown(ButtonConfigDef def)
 			return joystick.joy1_TopHat == def.button;
 		}
 
+#if !EMULATOR_TARGET
 		if (def.joystickIndex == JOYSTICK_2)
 		{
 			writeDebugStreamLine("DPAD");
 			return joystick.joy2_TopHat == def.button;
 		}
+#endif
 
 		return false;
 	}
@@ -35,11 +39,13 @@ bool isButtonDown(ButtonConfigDef def)
 			return joy1Btn(def.button) == BUTTON_DOWN;
 		}
 
+#if !EMULATOR_TARGET
 		if (def.joystickIndex == JOYSTICK_2)
 		{
 			writeDebugStreamLine("BUTTONS");
 			return joy2Btn(def.button) == BUTTON_DOWN;
 		}
+#endif
 
 		return false;
 	}
