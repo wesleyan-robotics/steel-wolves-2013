@@ -11,19 +11,19 @@ bool isInDeadzone(int x)
 
 int joystickToPower(int x)
 {
-	if (abs(x) > DEAD_ZONE)
+	if (isInDeadzone(x))
 	{
-		float offset = 20.0;
-		float intialOffset = offset * signOf(x);
-
-		float fraction = pow(x, 2) / (float) pow(JOYSTICK_MAX, 2);
-		float exponential = fraction * (POWER_MAX - offset) * signOf(x);
-		float power = exponential + intialOffset;
-
-		return floor(power);
+		return 0;
 	}
 
-	return 0;
+	float offset = 20.0;
+	float intialOffset = offset * signOf(x);
+
+	float fraction = pow(x, 2) / (float) pow(JOYSTICK_MAX, 2);
+	float exponential = fraction * (POWER_MAX - offset) * signOf(x);
+	float power = exponential + intialOffset;
+
+	return floor(power);
 }
 
 void joystickDebugDisplay()

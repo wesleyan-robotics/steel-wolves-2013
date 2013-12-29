@@ -14,16 +14,21 @@ void updateWithArcadeDriving()
 	int y = joystick.joy1_y1;
 	int x = joystick.joy1_x2;
 
-	int power = joystickToPower(y);
+	int power = joystickToPower(y) * POWER_LIMIT_FACTOR;
 	HorizontalDirection direction = getHorizontalDirection(x);
 
-	if (isInDeadzone(x) && isInDeadzone(y))
+	// Ignore values if both the joysticks are in the deadzones
+	if (power == 0 || (isInDeadzone(x) && isInDeadzone(y)))
 	{
 		stopWheels();
 		return;
 	}
 
-	if (isInDeadzone(x) && !isInDeadzone(y))
+	// Allow for turning if the x value is moving while the y value is not
+	// The joysticks look like this:
+	//    [x]   [y]
+	//    <->    *
+	if (!isInDeadzone(x) && isInDeadzone(y))
 	{
 		drive(direction, TURNING_POWER);
 		return;
@@ -36,11 +41,11 @@ void updateWithTankDriving()
 {
 	if (!isGroupEnabled(MOTOR_CONFIG.wheelGroup)) return;
 
-	int leftPower = joystickToPower(joystick.joy1_y1);
-	int rightPower = joystickToPower(joystick.joy1_y2);
+	int left = joystick.joy1_y1;
+	int right = joystick.joy1_y2;
 
-	setPower(MOTOR_CONFIG.wheelGroup[FRONT_LEFT], leftPower);
-	setPower(MOTOR_CONFIG.wheelGroup[BACK_LEFT], leftPower);
-	setPower(MOTOR_CONFIG.wheelGroup[FRONT_RIGHT], rightPower);
-	setPower(MOTOR_CONFIG.wheelGroup[BACK_RIGHT], rightPower);
+	int leftPower = joystickToPower(left);
+	int rightPower = joystickToPower(right);
+
+	setWheelPower(leftPower, rightPower);
 }

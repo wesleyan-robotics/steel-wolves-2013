@@ -35,8 +35,6 @@ typedef enum {
 	VDIR_DOWN
 } VerticalDirection;
 
-const int POWER_MIN = 0;
-const int POWER_MAX = 100;
 const int JOYSTICK_MIN = -127;
 const int JOYSTICK_MAX = 127;
 
