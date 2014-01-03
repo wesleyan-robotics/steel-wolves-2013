@@ -68,16 +68,14 @@ void drive(HorizontalDirection direction, int power)
 	if (direction == HDIR_RIGHT)
 	{
 		writeDebugStreamLine("Right Direction");
-		turnWheelsRight(power);
+		turnWheels(HDIR_RIGHT, power);
 		return;
 	}
 
 	if (direction == HDIR_LEFT)
 	{
 		writeDebugStreamLine("Left Direction");
-		turnWheelsLeft(power);
+		turnWheels(HDIR_LEFT, power);
 		return;
 	}
 }
-
-

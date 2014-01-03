@@ -3,6 +3,7 @@
 
 #include "JoystickDriver.h"
 #include "MotorConfig.h"
+#include "Joystick.h"
 
 bool isInDeadzone(int x)
 {
@@ -20,7 +21,7 @@ int joystickToPower(int x)
 	float intialOffset = offset * signOf(x);
 
 	float fraction = pow(x, 2) / (float) pow(JOYSTICK_MAX, 2);
-	float exponential = fraction * (POWER_MAX - offset) * signOf(x);
+	float exponential = fraction * (MAX_POWER - offset) * signOf(x);
 	float power = exponential + intialOffset;
 
 	return floor(power);
