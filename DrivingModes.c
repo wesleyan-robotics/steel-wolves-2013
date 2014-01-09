@@ -17,13 +17,6 @@ void updateWithArcadeDriving()
 	int power = joystickToPower(y) * POWER_LIMIT_FACTOR;
 	HorizontalDirection direction = getHorizontalDirection(x);
 
-	// Ignore values if both the joysticks are in the deadzones
-	if (power == 0 || (isInDeadzone(x) && isInDeadzone(y)))
-	{
-		stopWheels();
-		return;
-	}
-
 	// Allow for turning if the x value is moving while the y value is not
 	// The joysticks look like this:
 	//    [x]   [y]
@@ -31,6 +24,13 @@ void updateWithArcadeDriving()
 	if (!isInDeadzone(x) && isInDeadzone(y))
 	{
 		drive(direction, TURNING_POWER);
+		return;
+	}
+
+	// Ignore values if both the joysticks are in the deadzones
+	if (isInDeadzone(x) && isInDeadzone(y))
+	{
+		stopWheels();
 		return;
 	}
 

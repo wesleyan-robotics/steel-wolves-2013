@@ -31,7 +31,7 @@ void setWheelPowerOnSide(WheelSide side, int power)
 	{
 		setPower(MOTOR_CONFIG.wheelGroup[FRONT_RIGHT], power);
 		setPower(MOTOR_CONFIG.wheelGroup[BACK_RIGHT], power);
-		return
+		return;
 	}
 }
 
