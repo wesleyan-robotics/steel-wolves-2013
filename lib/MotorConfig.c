@@ -1,5 +1,5 @@
 #pragma once
-#include "MotorConfig.h"
+#include "../include/MotorConfig.h"
 
 void setPower(MotorConfigDef *def, int power)
 {

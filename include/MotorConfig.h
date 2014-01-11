@@ -69,10 +69,9 @@ const int SIDE_GROUP_LEN = 3;
 
 typedef struct
 {
-    MotorConfigDef liftGroup[SIDE_GROUP_LEN];
     MotorConfigDef bucketGroup[SIDE_GROUP_LEN];
     MotorConfigDef wheelGroup[WHEEL_GROUP_LEN];
-    MotorConfigDef auxiliaryLift;
+    MotorConfigDef lift;
     MotorConfigDef flag;
 } MotorConfig;
 

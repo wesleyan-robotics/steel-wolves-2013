@@ -1,5 +1,5 @@
 #pragma once
-#include "Math.h"
+#include "../include/Math.h"
 
 float signOf(float x)
 {

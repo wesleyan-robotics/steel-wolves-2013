@@ -4,7 +4,7 @@
         The `CONFIG_BUTTON` macro allows of having a short hand notation for
         setting up the button config section of code without having to be
         repetetive.
-        
+
         Note: All `ButtonConfigDef`s that are being refrenced must be already
         defined in the `BUTTON_CONFIG` struct
     Usage:
@@ -40,7 +40,8 @@ typedef struct {
 	ButtonConfigDef liftUp;
 	ButtonConfigDef liftDown;
 	ButtonConfigDef auxiliaryLift;
-	ButtonConfigDef flag;
+	ButtonConfigDef flagUp;
+	ButtonConfigDef flagDown;
 } ButtonConfig;
 
 const short BUTTON_UP = 0;

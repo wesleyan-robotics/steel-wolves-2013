@@ -13,9 +13,8 @@ task run()
 	nMotorEncoder[motorWheelFrontLeft] = 0;
 	nMotorEncoder[motorWheelFrontRight] = 0;
 
-	const int TARGET = 360;
-	while (nMotorEncoder[motorWheelFrontLeft] < TARGET
-        && nMotorEncoder[motorWheelFrontRight] < TARGET)
+	const int TARGET = 720;
+	while (abs(nMotorEncoder[motorWheelFrontLeft]) < TARGET)
     {
     	setWheelPower(50);
     }

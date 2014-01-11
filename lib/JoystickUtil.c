@@ -1,9 +1,9 @@
 #pragma once
-#include "JoystickUtil.h"
+#include "../include/JoystickUtil.h"
 
-#include "JoystickDriver.h"
-#include "MotorConfig.h"
-#include "Joystick.h"
+#include "../include/JoystickDriver.h"
+#include "../include/MotorConfig.h"
+#include "../include/Joystick.h"
 
 bool isInDeadzone(int x)
 {
