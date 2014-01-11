@@ -13,7 +13,7 @@
 #pragma config(Servo,  srvo_S1_C4_5,    servoSideAndSideMoveyThing, tServoContinuousRotation)
 #pragma config(Servo,  srvo_S1_C4_6,    servo6,               tServoNone)
 
-#include "Includes.h"
+#include "../include/Includes.h"
 
 task run()
 {
