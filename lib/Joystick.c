@@ -30,12 +30,7 @@ task joystickListener()
 
 void doJoystickUpdate()
 {
-	writeDebugStreamLine("Joystick Update Fired");
 	joystickDebugDisplay();
-
-	//writeDebugStreamLine("true = %d", true);
-	//writeDebugStreamLine("false = %d", false);
-	//writeDebugStreamLine("isGroupEnabled(MOTOR_CONFIG.wheelGroup) -> %d", isGroupEnabled(MOTOR_CONFIG.wheelGroup));
 
 	if (isGroupEnabled(MOTOR_CONFIG.wheelGroup))
 	{
