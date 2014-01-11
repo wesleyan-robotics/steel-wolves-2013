@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Kernel.c"
 #include "Math.c"
 #include "JoystickUtil.c"
 #include "Joystick.c"

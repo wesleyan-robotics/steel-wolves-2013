@@ -15,11 +15,8 @@
 
 #include "Includes.h"
 
-task main()
+task run()
 {
-    initMotorConfig();
-    waitForStart();
-
 	setWheelPower(-100);
     wait1Msec(6500);
     stopWheels();

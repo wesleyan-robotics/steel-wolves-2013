@@ -80,6 +80,7 @@ typedef struct
 const int NO_MOTOR_ID = -1;
 
 MotorConfig MOTOR_CONFIG;
+const MotorConfig *MC = &MOTOR_CONFIG;
 
 int getPower(MotorConfigDef *def);
 void setPower(MotorConfigDef *def, int power);
