@@ -1,5 +1,4 @@
 #pragma once
-#include "MotorConfig.h"
 
 /*  Descrption:
         The `CONFIG_MOTOR` macro allows of having a short hand notation for

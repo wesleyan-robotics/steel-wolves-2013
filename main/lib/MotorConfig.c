@@ -1,7 +1,5 @@
 #pragma once
-#include "MotorConfigImpl.h"
-
-#include "MotorConfig.h"
+#include "include/MotorConfig.h"
 
 void initMotorConfig()
 {

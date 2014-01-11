@@ -1,15 +1,16 @@
 #pragma once
-#include "../include/Kernel.h"
+#include "include/Kernel.h"
 
-#include "../include/MotorConfigImpl.h"
-#include "../include/JoystickDriver.h"
+#include "include/JoystickDriver.h"
 
+void config();
 task run();
 
 task main()
 {
-    initMotorConfig();
+    config();
     waitForStart();
     StartTask(run);
+
     while(true);
 }
