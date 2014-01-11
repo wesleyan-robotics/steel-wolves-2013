@@ -14,14 +14,12 @@ bool isButtonDown(ButtonConfigDef def)
 
 		if (def.joystickIndex == JOYSTICK_1)
 		{
-			writeDebugStreamLine("DPAD");
 			return joystick.joy1_TopHat == def.button;
 		}
 
 #if !EMULATOR_TARGET
 		if (def.joystickIndex == JOYSTICK_2)
 		{
-			writeDebugStreamLine("DPAD");
 			return joystick.joy2_TopHat == def.button;
 		}
 #endif
@@ -35,14 +33,12 @@ bool isButtonDown(ButtonConfigDef def)
 
 		if (def.joystickIndex == JOYSTICK_1)
 		{
-			writeDebugStreamLine("BUTTONS");
 			return joy1Btn(def.button) == BUTTON_DOWN;
 		}
 
 #if !EMULATOR_TARGET
 		if (def.joystickIndex == JOYSTICK_2)
 		{
-			writeDebugStreamLine("BUTTONS");
 			return joy2Btn(def.button) == BUTTON_DOWN;
 		}
 #endif

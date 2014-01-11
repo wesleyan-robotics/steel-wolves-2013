@@ -10,7 +10,6 @@
 void updateWithArcadeDriving()
 {
 	if (!isGroupEnabled(MOTOR_CONFIG.wheelGroup)) return;
-	writeDebugStreamLine("Updating driving");
 
 	int y = joystick.joy1_y1;
 	int x = joystick.joy1_x2;

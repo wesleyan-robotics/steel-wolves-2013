@@ -45,10 +45,6 @@ void joystickDebugDisplay()
 
 HorizontalDirection getHorizontalDirection(int x)
 {
-	string toWrite;
-	sprintf(toWrite, "X: %i", x);
-	writeDebugStreamLine(toWrite);
-
 	if (isInDeadzone(x)) return HDIR_CENTER;
 	if (x > DEAD_ZONE) return HDIR_RIGHT;
 	return HDIR_LEFT;
@@ -56,10 +52,6 @@ HorizontalDirection getHorizontalDirection(int x)
 
 VerticalDirection getVerticalDirection(int y)
 {
-	string toWrite;
-	sprintf(toWrite, "Y: %i", y);
-	writeDebugStreamLine(toWrite);
-
 	if (isInDeadzone(y)) return VDIR_CENTER;
 	if (y > DEAD_ZONE) return VDIR_UP;
 	return VDIR_DOWN;
