@@ -1,4 +1,6 @@
 #pragma once
+#include "lib/include/MotorUtil.h"
+
 #include "Includes.h"
 #include "include/JoystickImpl.h"
 #include "include/DrivingModes.h"
