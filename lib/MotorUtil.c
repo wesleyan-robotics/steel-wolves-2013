@@ -1,6 +1,6 @@
 #pragma once
-#include "../include/MotorUtil.h"
-#include "../include/MotorConfig.h"
+#include "include/MotorUtil.h"
+#include "include/MotorConfig.h"
 
 void stopWheels()
 {

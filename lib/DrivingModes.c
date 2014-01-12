@@ -1,11 +1,11 @@
 #pragma once
-#include "../include/DrivingModes.h"
+#include "include/DrivingModes.h"
 
-#include "../include/Joystick.h"
-#include "../include/JoystickDriver.h"
-#include "../include/JoystickUtil.h"
-#include "../include/MotorUtil.h"
-#include "../include/MotorConfig.h"
+#include "include/Joystick.h"
+#include "include/JoystickDriver.h"
+#include "include/JoystickUtil.h"
+#include "include/MotorUtil.h"
+#include "include/MotorConfig.h"
 
 void updateWithArcadeDriving()
 {

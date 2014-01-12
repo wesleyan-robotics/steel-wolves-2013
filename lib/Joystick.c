@@ -1,12 +1,12 @@
 #pragma once
-#include "../include/Joystick.h";
+#include "include/Joystick.h";
 
-#include "../include/MotorConfig.h"
-#include "../include/JoystickDriver.h"
-#include "../include/JoystickUtil.h"
-#include "../include/Math.h";
-#include "../include/DrivingModes.h"
-#include "../include/ButtonConfig.h"
+#include "include/MotorConfig.h"
+#include "include/JoystickDriver.h"
+#include "include/JoystickUtil.h"
+#include "include/Math.h";
+#include "include/DrivingModes.h"
+#include "include/ButtonConfig.h"
 
 void initJoystick()
 {
