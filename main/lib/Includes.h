@@ -2,5 +2,7 @@
 
 #include "../../lib/Includes.h"
 
-#include "InitConfig.c"
+#include "InitConfigImpl.c"
 #include "MotorConfigImpl.c"
+#include "ButtonConfigImpl.c"
+#include "JoystickImpl.c"

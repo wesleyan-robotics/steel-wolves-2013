@@ -1,10 +1,8 @@
 #pragma once
 #include "include/Kernel.h"
-
 #include "include/JoystickDriver.h"
 
-void config();
-task run();
+#include "interface/KernelInterface.h"
 
 task main()
 {
