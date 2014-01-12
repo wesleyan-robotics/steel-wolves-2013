@@ -16,6 +16,7 @@ void updateWithArcadeDriving()
 
 	int power = joystickToPower(y) * POWER_LIMIT_FACTOR;
 	HorizontalDirection direction = getHorizontalDirection(x);
+	direction = invertDirection(direction);
 
 	// Allow for turning if the x value is moving while the y value is not
 	// The joysticks look like this:

@@ -15,6 +15,6 @@
 task run()
 {
 	setWheelPower(100);
-    wait1Msec(6500);
+    wait1Msec(4000);
     stopWheels();
 }

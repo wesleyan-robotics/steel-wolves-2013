@@ -24,12 +24,14 @@ typedef enum {
 } JoystickButton;
 
 typedef enum {
+    HDIR_INVALID,
 	HDIR_CENTER,
 	HDIR_LEFT,
 	HDIR_RIGHT
 } HorizontalDirection;
 
 typedef enum {
+    VDIR_INVALID,
 	VDIR_CENTER,
 	VDIR_UP,
 	VDIR_DOWN

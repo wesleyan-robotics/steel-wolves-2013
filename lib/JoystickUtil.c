@@ -56,3 +56,19 @@ VerticalDirection getVerticalDirection(int y)
 	if (y > DEAD_ZONE) return VDIR_UP;
 	return VDIR_DOWN;
 }
+
+HorizontalDirection invertDirection(HorizontalDirection direction)
+{
+    if (direction == HDIR_CENTER) return HDIR_CENTER;
+    if (direction == HDIR_LEFT) return HDIR_RIGHT;
+    if (direction == HDIR_RIGHT) return HDIR_LEFT;
+    return HDIR_INVALID;
+}
+
+VerticalDirection invertDirection(VerticalDirection direction)
+{
+    if (direction == VDIR_CENTER) return VDIR_CENTER;
+    if (direction == VDIR_DOWN) return VDIR_UP;
+    if (direction == VDIR_UP) return VDIR_DOWN;
+    return VDIR_INVALID;
+}
