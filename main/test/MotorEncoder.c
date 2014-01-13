@@ -14,7 +14,7 @@
 
 const int TICKS_PER_ROTATION = 360;
 
-task run()
+task SL_Run()
 {
 	nMotorEncoder[motorWheelFrontLeft] = 0;
 	nMotorEncoder[motorWheelFrontRight] = 0;
@@ -22,8 +22,8 @@ task run()
 	const int TARGET = 2 * TICKS_PER_ROTATION;
 	while (abs(nMotorEncoder[motorWheelFrontLeft]) < TARGET)
     {
-    	setWheelPower(50);
+    	SL_SetWheelPower(50);
     }
 
-    stopWheels();
+    SL_StopWheels();
 }

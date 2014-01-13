@@ -2,7 +2,7 @@
 #include "libsteel/interface/KernelInterface.h"
 #include "libsteel/interface/MotorConfigInterface.h"
 
-void config()
+void SL_Config()
 {
-	initMotorConfig();
+	SL_InitMotorConfig();
 }

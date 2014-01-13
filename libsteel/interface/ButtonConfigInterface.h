@@ -1,3 +1,3 @@
 #pragma once
 
-void initButtonConfig();
+void SL_InitButtonConfig();

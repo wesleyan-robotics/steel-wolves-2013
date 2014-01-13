@@ -2,9 +2,9 @@
 #include "libsteel/include/ButtonConfig.h"
 
 struct {
-	ButtonConfigDef liftUp;
-	ButtonConfigDef liftDown;
-	ButtonConfigDef auxiliaryLift;
-	ButtonConfigDef flagUp;
-	ButtonConfigDef flagDown;
-} ButtonConfigImpl;
+	SL_ButtonConfigDef liftUp;
+	SL_ButtonConfigDef liftDown;
+	SL_ButtonConfigDef auxiliaryLift;
+	SL_ButtonConfigDef flagUp;
+	SL_ButtonConfigDef flagDown;
+} SL_ButtonConfigImpl;

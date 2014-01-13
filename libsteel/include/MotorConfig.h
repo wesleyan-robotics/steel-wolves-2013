@@ -1,68 +1,68 @@
 #pragma once
 
 /*  Descrption:
-        The `CONFIG_MOTOR` macro allows of having a short hand notation for
+        The `SL_CONFIG_MOTOR` macro allows of having a short hand notation for
         setting up the motor config section of code without having to be
         repetitive.
 
-        Note: All `MotorConfigDef`s that are being referenced must be already
-        defined in the `MOTOR_CONFIG` struct
+        Note: All `SL_MotorConfigDef`s that are being referenced must be already
+        defined in the `SL_MOTOR_CONFIG` struct
     Usage:
-        CONFIG_MOTOR(MotorConfigDef def, int motorIndex, MotorType type, bool isEnabled)
+        SL_CONFIG_MOTOR(SL_MotorConfigDef def, int motorIndex, SL_MotorType type, bool isEnabled)
     Examples:
         CONFIG_MOTOR(flag, servoFlag, TYPE_SERVO, true)
         CONFIG_MOTOR(wheelGroup[FRONT_LEFT], motorWheelFrontLeft, TYPE_MOTOR, true)
 */
-#define CONFIG_MOTOR(def, __id, __type, __isEnabled) \
-    MOTOR_CONFIG->def.id = __id; \
-    MOTOR_CONFIG->def.type = __type; \
-    MOTOR_CONFIG->def.isEnabled = __isEnabled;
+#define SL_CONFIG_MOTOR(def, __id, __type, __isEnabled) \
+    SL_MOTOR_CONFIG->def.id = __id; \
+    SL_MOTOR_CONFIG->def.type = __type; \
+    SL_MOTOR_CONFIG->def.isEnabled = __isEnabled;
 
 /*  Descrption:
         Loops through a motor group assuming that there is a `NULL`
-        `MotorConfigDef` the end of the array.
+        `SL_MotorConfigDef` the end of the array.
     Usage:
-        Use `FOREACH_MOTOR_IN_GROUP` as the for loop and `INDEX` to get the
+        Use `SL_FOREACH_MOTOR_IN_GROUP` as the for loop and `INDEX` to get the
         current index in the array
     Example:
-        MotorConfigDef *group = MOTOR_CONFIG->wheelGroup;
-        FOREACH_MOTOR_IN_GROUP(group)
+        SL_MotorConfigDef *group = SL_MOTOR_CONFIG->wheelGroup;
+        SL_FOREACH_MOTOR_IN_GROUP(group)
         {
             group[INDEX].isEnabled = false;
         }
 */
-#define FOREACH_MOTOR_IN_GROUP(array)  \
-    for (int INDEX = 0; array[INDEX].type != TYPE_INVALID; INDEX++)
+#define SL_FOREACH_MOTOR_IN_GROUP(array)  \
+    for (int INDEX = 0; array[INDEX].type != SL_TYPE_INVALID; INDEX++)
 
 typedef enum
 {
-	TYPE_INVALID,
-	TYPE_MOTOR,
-	TYPE_SERVO
-} MotorType;
+	SL_TYPE_INVALID,
+	SL_TYPE_MOTOR,
+	SL_TYPE_SERVO
+} SL_MotorType;
 
 typedef struct
 {
 	int id;
-	MotorType type;
+	SL_MotorType type;
 	bool isEnabled;
-} MotorConfigDef;
+} SL_MotorConfigDef;
 
 const int NO_MOTOR_ID = -1;
 
 // struct MotorConfigImml is implemented by the user
-struct MotorConfigImpl;
-typedef MotorConfigImpl MotorConfig;
+struct SL_MotorConfigImpl;
+typedef SL_MotorConfigImpl SL_MotorConfig;
 
 /* HACK: For some strange reason, you have to reference the fancy forward
          declared struct with a pointer to it. Don't ask me why, but this works.
 */
-MotorConfig _MOTOR_CONFIG;
-const MotorConfig *MOTOR_CONFIG = &_MOTOR_CONFIG;
+SL_MotorConfig __SL_MOTOR_CONFIG;
+const SL_MotorConfig *SL_MOTOR_CONFIG = &__SL_MOTOR_CONFIG;
 
-int getPower(MotorConfigDef *def);
-void setPower(MotorConfigDef *def, int power);
-void setGroupPower(MotorConfigDef *group, int power);
-void enableGroup(MotorConfigDef *group);
-void disableGroup(MotorConfigDef *group);
-bool isGroupEnabled(MotorConfigDef *group);
+int SL_GetPower(SL_MotorConfigDef *def);
+void SL_SetPower(SL_MotorConfigDef *def, int power);
+void SL_SetGroupPower(SL_MotorConfigDef *group, int power);
+void SL_EnableGroup(SL_MotorConfigDef *group);
+void SL_DisableGroup(SL_MotorConfigDef *group);
+bool SL_IsGroupEnabled(SL_MotorConfigDef *group);

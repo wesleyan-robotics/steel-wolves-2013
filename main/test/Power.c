@@ -12,8 +12,8 @@
 
 #include "../lib/Includes.h"
 
-task run()
+task SL_Run()
 {
-	setWheelPower(100);
-	setPower(MOTOR_CONFIG->flag, 100);
+	SL_SetWheelPower(100);
+	SL_SetPower(SL_MOTOR_CONFIG->flag, 100);
 }

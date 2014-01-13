@@ -6,9 +6,9 @@
 
 task main()
 {
-    config();
+    SL_Config();
     waitForStart();
-    StartTask(run);
+    StartTask(SL_Run);
 
     while(true);
 }

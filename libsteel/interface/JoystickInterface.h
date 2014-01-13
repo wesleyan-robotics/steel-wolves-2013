@@ -1,3 +1,3 @@
 #pragma once
 
-void doJoystickUpdate();
+void SL_DoJoystickUpdate();

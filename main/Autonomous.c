@@ -12,9 +12,9 @@
 
 #include "lib/Includes.h"
 
-task run()
+task SL_Run()
 {
-	setWheelPower(100);
+	SL_SetWheelPower(100);
     wait1Msec(6500);
-    stopWheels();
+    SL_StopWheels();
 }

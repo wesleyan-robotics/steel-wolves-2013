@@ -12,8 +12,8 @@
 
 #include "lib/Includes.h"
 
-task run()
+task SL_Run()
 {
-	StartTask(joystickListener);
+	StartTask(SL_JoystickListener);
 	while (true);
 }

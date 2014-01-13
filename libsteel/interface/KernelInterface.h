@@ -1,4 +1,4 @@
 #pragma once
 
-void config();
-task run();
+void SL_Config();
+task SL_Run();

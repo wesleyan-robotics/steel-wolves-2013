@@ -3,13 +3,13 @@
 
 typedef enum
 {
-	WHEELS_LEFT,
-	WHEELS_RIGHT
-} WheelSide;
+	SL_WHEELS_LEFT,
+	SL_WHEELS_RIGHT
+} SL_WheelSide;
 
-void stopWheels();
-void setWheelPower(int power);
-void setWheelPower(int leftPower, int rightPower);
-void setWheelPowerOnSide(WheelSide side, int power);
-void drive(HorizontalDirection direction, int power);
-void turnWheels(HorizontalDirection direction, int power);
+void SL_StopWheels();
+void SL_SetWheelPower(int power);
+void SL_SetWheelPower(int leftPower, int rightPower);
+void SL_SetWheelPowerOnSide(SL_WheelSide side, int power);
+void SL_Drive(SL_HDirection direction, int power);
+void SL_TurnWheels(SL_HDirection direction, int power);

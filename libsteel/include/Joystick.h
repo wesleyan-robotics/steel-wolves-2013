@@ -1,10 +1,8 @@
 #pragma once
 
-#define POWER(power)  power * POWER_LIMIT_FACTOR
+const int SL_MIN_POWER = 0;
+const int SL_MAX_POWER = 100;
 
-const int MIN_POWER = 0;
-const int MAX_POWER = 100;
+const int SL_LOOP_DELAY_TIME = 50;
 
-const int LOOP_DELAY_TIME = 50;
-
-task joystickListener();
+task SL_JoystickListener();

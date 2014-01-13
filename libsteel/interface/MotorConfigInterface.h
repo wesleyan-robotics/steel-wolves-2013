@@ -1,3 +1,3 @@
 #pragma once
 
-void initMotorConfig();
+void SL_InitMotorConfig();

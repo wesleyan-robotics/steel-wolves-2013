@@ -5,38 +5,38 @@
 #include "include/MotorConfig.h"
 #include "include/Joystick.h"
 
-bool isInDeadzone(int x)
+bool SL_IsInDeadzone(int x)
 {
-	return abs(x) < DEAD_ZONE;
+	return abs(x) < SL_DEAD_ZONE;
 }
 
-int joystickToPower(int x)
+int SL_JoystickToPower(int x)
 {
-	if (isInDeadzone(x))
+	if (SL_IsInDeadzone(x))
 	{
 		return 0;
 	}
 
 	float offset = 20.0;
-	float intialOffset = offset * signOf(x);
+	float intialOffset = offset * SL_SignOf(x);
 
-	float fraction = pow(x, 2) / (float) pow(JOYSTICK_MAX, 2);
-	float exponential = fraction * (MAX_POWER - offset) * signOf(x);
+	float fraction = pow(x, 2) / (float) pow(SL_JOYSTICK_MAX, 2);
+	float exponential = fraction * (SL_MAX_POWER - offset) * SL_SignOf(x);
 	float power = exponential + intialOffset;
 
 	return floor(power);
 }
 
-HorizontalDirection getHorizontalDirection(int x)
+SL_HDirection SL_GetHDirection(int x)
 {
-	if (isInDeadzone(x)) return HDIR_CENTER;
-	if (x > DEAD_ZONE) return HDIR_RIGHT;
-	return HDIR_LEFT;
+	if (SL_IsInDeadzone(x)) return SL_HDIR_CENTER;
+	if (x > SL_DEAD_ZONE) return SL_HDIR_RIGHT;
+	return SL_HDIR_LEFT;
 }
 
-VerticalDirection getVerticalDirection(int y)
+SL_VDirection SL_GetVDirection(int y)
 {
-	if (isInDeadzone(y)) return VDIR_CENTER;
-	if (y > DEAD_ZONE) return VDIR_UP;
-	return VDIR_DOWN;
+	if (SL_IsInDeadzone(y)) return SL_VDIR_CENTER;
+	if (y > SL_DEAD_ZONE) return SL_VDIR_UP;
+	return SL_VDIR_DOWN;
 }

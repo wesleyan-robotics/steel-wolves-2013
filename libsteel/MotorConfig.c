@@ -1,33 +1,33 @@
 #pragma once
 #include "include/MotorConfig.h"
 
-void setPower(MotorConfigDef *def, int power)
+void SL_SetPower(SL_MotorConfigDef *def, int power)
 {
 	if (!def->isEnabled) return;
 
-	if (def->type == TYPE_MOTOR)
+	if (def->type == SL_TYPE_MOTOR)
 	{
 		motor[def->id] = power;
 		return;
 	}
 
-	if (def->type == TYPE_SERVO)
+	if (def->type == SL_TYPE_SERVO)
 	{
 		servo[def->id] = power;
 		return;
 	}
 }
 
-int getPower(MotorConfigDef *def)
+int SL_GetPower(SL_MotorConfigDef *def)
 {
 	if (!def->isEnabled) return 0;
 
-	if (def->type == TYPE_MOTOR)
+	if (def->type == SL_TYPE_MOTOR)
 	{
 		return motor[def->id];
 	}
 
-	if (def->type == TYPE_SERVO)
+	if (def->type == SL_TYPE_SERVO)
 	{
 		return servo[def->id];
 	}
@@ -35,35 +35,35 @@ int getPower(MotorConfigDef *def)
     return 0;
 }
 
-void setGroupPower(MotorConfigDef *group, int power)
+void SL_SetGroupPower(SL_MotorConfigDef *group, int power)
 {
-    FOREACH_MOTOR_IN_GROUP(group)
+    SL_FOREACH_MOTOR_IN_GROUP(group)
     {
-        setPower(&group[INDEX], power);
+        SL_SetPower(&group[INDEX], power);
     }
 }
 
-void enableGroup(MotorConfigDef *group)
+void SL_EnableGroup(SL_MotorConfigDef *group)
 {
-    FOREACH_MOTOR_IN_GROUP(group)
+    SL_FOREACH_MOTOR_IN_GROUP(group)
     {
         group[INDEX].isEnabled = true;
     }
 }
 
-void disableGroup(MotorConfigDef *group)
+void SL_DisableGroup(SL_MotorConfigDef *group)
 {
-    FOREACH_MOTOR_IN_GROUP(group)
+    SL_FOREACH_MOTOR_IN_GROUP(group)
     {
         group[INDEX].isEnabled = false;
     }
 }
 
-bool isGroupEnabled(MotorConfigDef *group)
+bool SL_IsGroupEnabled(SL_MotorConfigDef *group)
 {
     bool isEnabled = true;
 
-    FOREACH_MOTOR_IN_GROUP(group)
+    SL_FOREACH_MOTOR_IN_GROUP(group)
     {
         isEnabled = isEnabled && group[INDEX].isEnabled;
     }

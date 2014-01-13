@@ -4,14 +4,14 @@
 #include "interface/ButtonConfigInterface.h"
 #include "interface/JoystickInterface.h"
 
-task joystickListener()
+task SL_JoystickListener()
 {
-	initButtonConfig();
+	SL_InitButtonConfig();
 
 	while(true)
 	{
-		wait1Msec(LOOP_DELAY_TIME);
+		wait1Msec(SL_LOOP_DELAY_TIME);
 		getJoystickSettings(joystick);
-		doJoystickUpdate();
+		SL_DoJoystickUpdate();
 	}
 }

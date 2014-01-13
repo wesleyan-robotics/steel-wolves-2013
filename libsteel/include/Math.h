@@ -1,3 +1,3 @@
 #pragma once
 
-float signOf(float x);
+float SL_SignOf(float x);

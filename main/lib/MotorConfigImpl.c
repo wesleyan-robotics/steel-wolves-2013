@@ -1,13 +1,13 @@
 #pragma once
 #include "config/MotorConfigImpl.h"
 
-void initMotorConfig()
+void SL_InitMotorConfig()
 {
-	CONFIG_MOTOR(wheelGroup[FRONT_LEFT], motorWheelFrontLeft, TYPE_MOTOR, true)
-	CONFIG_MOTOR(wheelGroup[FRONT_RIGHT], motorWheelFrontRight, TYPE_MOTOR, true)
-	CONFIG_MOTOR(wheelGroup[BACK_LEFT], motorWheelBackLeft, TYPE_MOTOR, true)
-	CONFIG_MOTOR(wheelGroup[BACK_RIGHT], motorWheelBackRight, TYPE_MOTOR, true)
+	SL_CONFIG_MOTOR(wheelGroup[FRONT_LEFT], motorWheelFrontLeft, SL_TYPE_MOTOR, true)
+	SL_CONFIG_MOTOR(wheelGroup[FRONT_RIGHT], motorWheelFrontRight, SL_TYPE_MOTOR, true)
+	SL_CONFIG_MOTOR(wheelGroup[BACK_LEFT], motorWheelBackLeft, SL_TYPE_MOTOR, true)
+	SL_CONFIG_MOTOR(wheelGroup[BACK_RIGHT], motorWheelBackRight, SL_TYPE_MOTOR, true)
 
-	CONFIG_MOTOR(flag, motorFlag, TYPE_MOTOR, true)
-	CONFIG_MOTOR(lift, motorLift, TYPE_MOTOR, true)
+	SL_CONFIG_MOTOR(flag, motorFlag, SL_TYPE_MOTOR, true)
+	SL_CONFIG_MOTOR(lift, motorLift, SL_TYPE_MOTOR, true)
 }

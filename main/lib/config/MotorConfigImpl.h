@@ -20,8 +20,8 @@ const int WHEEL_GROUP_LEN = 5;
 const int SIDE_GROUP_LEN = 3;
 
 struct {
-    MotorConfigDef bucketGroup[SIDE_GROUP_LEN];
-    MotorConfigDef wheelGroup[WHEEL_GROUP_LEN];
-    MotorConfigDef lift;
-    MotorConfigDef flag;
-} MotorConfigImpl;
+    SL_MotorConfigDef bucketGroup[SIDE_GROUP_LEN];
+    SL_MotorConfigDef wheelGroup[WHEEL_GROUP_LEN];
+    SL_MotorConfigDef lift;
+    SL_MotorConfigDef flag;
+} SL_MotorConfigImpl;

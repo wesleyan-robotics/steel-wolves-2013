@@ -2,24 +2,24 @@
 #include "include/ButtonConfig.h"
 #include "include/JoystickDriver.h"
 
-#define EMULATOR_TARGET  \
+#define SL_EMULATOR_TARGET  \
 	(defined(NXT) || defined(TETRIX)) && defined(_Target_Emulator_)
 
-bool isButtonDown(ButtonConfigDef *def)
+bool SL_IsButtonDown(SL_ButtonConfigDef *def)
 {
-	if (def->type == INVALID) return false;
+	if (def->type == SL_INVALID) return false;
 
-	if (def->type == DPAD)
+	if (def->type == SL_DPAD)
 	{
-		if (def->joystickIndex == INVALID) return false;
+		if (def->joystickIndex == SL_INVALID) return false;
 
-		if (def->joystickIndex == JOYSTICK_1)
+		if (def->joystickIndex == SL_JOYSTICK_1)
 		{
 			return joystick.joy1_TopHat == def->button;
 		}
 
-#if !EMULATOR_TARGET
-		if (def->joystickIndex == JOYSTICK_2)
+#if !SL_EMULATOR_TARGET
+		if (def->joystickIndex == SL_JOYSTICK_2)
 		{
 			return joystick.joy2_TopHat == def->button;
 		}
@@ -28,19 +28,19 @@ bool isButtonDown(ButtonConfigDef *def)
 		return false;
 	}
 
-	if (def->type == BUTTON)
+	if (def->type == SL_BUTTON)
 	{
-		if (def->joystickIndex == INVALID) return false;
+		if (def->joystickIndex == SL_INVALID) return false;
 
-		if (def->joystickIndex == JOYSTICK_1)
+		if (def->joystickIndex == SL_JOYSTICK_1)
 		{
-			return joy1Btn(def->button) == BUTTON_DOWN;
+			return joy1Btn(def->button) == SL_BUTTON_DOWN;
 		}
 
-#if !EMULATOR_TARGET
-		if (def->joystickIndex == JOYSTICK_2)
+#if !SL_EMULATOR_TARGET
+		if (def->joystickIndex == SL_JOYSTICK_2)
 		{
-			return joy2Btn(def->button) == BUTTON_DOWN;
+			return joy2Btn(def->button) == SL_BUTTON_DOWN;
 		}
 #endif
 

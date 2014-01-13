@@ -1,5 +1,7 @@
 #pragma once
 
+#define POWER(power)  power * POWER_LIMIT_FACTOR
+
 const float POWER_LIMIT_FACTOR = 1.0;
 
 const int FLAG_POWER = POWER(50);

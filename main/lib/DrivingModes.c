@@ -9,43 +9,43 @@
 
 void updateWithArcadeDriving()
 {
-	if (!isGroupEnabled(MOTOR_CONFIG->wheelGroup)) return;
+	if (!SL_IsGroupEnabled(SL_MOTOR_CONFIG->wheelGroup)) return;
 
 	int y = joystick.joy1_y1;
 	int x = joystick.joy1_x2;
 
-	int power = joystickToPower(y) * POWER_LIMIT_FACTOR;
-	HorizontalDirection direction = getHorizontalDirection(x);
+	int power = SL_JoystickToPower(y) * POWER_LIMIT_FACTOR;
+	SL_HDirection direction = SL_GetHDirection(x);
 
 	// Allow for turning if the x value is moving while the y value is not
 	// The joysticks look like this:
 	//    [x]   [y]
 	//    <->    *
-	if (!isInDeadzone(x) && isInDeadzone(y))
+	if (!SL_IsInDeadzone(x) && SL_IsInDeadzone(y))
 	{
-		drive(direction, TURNING_POWER);
+		SL_Drive(direction, TURNING_POWER);
 		return;
 	}
 
 	// Ignore values if both the joysticks are in the deadzones
-	if (isInDeadzone(x) && isInDeadzone(y))
+	if (SL_IsInDeadzone(x) && SL_IsInDeadzone(y))
 	{
-		stopWheels();
+		SL_StopWheels();
 		return;
 	}
 
-	drive(direction, power);
+	SL_Drive(direction, power);
 }
 
 void updateWithTankDriving()
 {
-	if (!isGroupEnabled(MOTOR_CONFIG->wheelGroup)) return;
+	if (!SL_IsGroupEnabled(SL_MOTOR_CONFIG->wheelGroup)) return;
 
 	int left = joystick.joy1_y1;
 	int right = joystick.joy1_y2;
 
-	int leftPower = joystickToPower(left);
-	int rightPower = joystickToPower(right);
+	int leftPower = SL_JoystickToPower(left);
+	int rightPower = SL_JoystickToPower(right);
 
-	setWheelPower(leftPower, rightPower);
+	SL_SetWheelPower(leftPower, rightPower);
 }
