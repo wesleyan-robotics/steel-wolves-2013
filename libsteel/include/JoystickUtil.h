@@ -24,12 +24,14 @@ typedef enum {
 } SL_JoystickButton;
 
 typedef enum {
+    SL_HDIR_INVALID,
 	SL_HDIR_CENTER,
 	SL_HDIR_LEFT,
 	SL_HDIR_RIGHT
 } SL_HDirection;
 
 typedef enum {
+    SL_VDIR_INVALID,
 	SL_VDIR_CENTER,
 	SL_VDIR_UP,
 	SL_VDIR_DOWN
@@ -44,3 +46,5 @@ bool SL_IsInDeadzone(int x);
 int SL_JoystickToPower(int x);
 SL_HDirection SL_GetHDirection(int x);
 SL_VDirection SL_GetVDirection(int y);
+SL_HDirection SL_InvertDirection(SL_HDirection direction);
+SL_VDirection SL_InvertDirection(SL_VDirection direction);

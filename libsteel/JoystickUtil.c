@@ -40,3 +40,19 @@ SL_VDirection SL_GetVDirection(int y)
 	if (y > SL_DEAD_ZONE) return SL_VDIR_UP;
 	return SL_VDIR_DOWN;
 }
+
+SL_HDirection SL_InvertDirection(SL_HDirection direction)
+{
+    if (direction == SL_HDIR_CENTER) return SL_HDIR_CENTER;
+    if (direction == SL_HDIR_LEFT) return SL_HDIR_RIGHT;
+    if (direction == SL_HDIR_RIGHT) return SL_HDIR_LEFT;
+    return SL_HDIR_INVALID;
+}
+
+SL_VDirection SL_InvertDirection(SL_VDirection direction)
+{
+    if (direction == SL_VDIR_CENTER) return SL_VDIR_CENTER;
+    if (direction == SL_VDIR_DOWN) return SL_VDIR_UP;
+    if (direction == SL_VDIR_UP) return SL_VDIR_DOWN;
+    return SL_VDIR_INVALID;
+}

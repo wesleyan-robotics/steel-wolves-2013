@@ -15,6 +15,6 @@
 task SL_Run()
 {
 	SL_SetWheelPower(100);
-    wait1Msec(6500);
+    wait1Msec(4000);
     SL_StopWheels();
 }
