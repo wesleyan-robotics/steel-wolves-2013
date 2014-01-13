@@ -7,7 +7,8 @@
 
 #include "libsteel/Includes.h"
 
-#include "include/MotorConfigImpl.h"
+#include "config/MotorConfigImpl.h"
+#include "config/ButtonConfigImpl.h"
 
 #include "KernelConfigImpl.c"
 #include "MotorConfigImpl.c"

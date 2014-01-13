@@ -14,9 +14,9 @@
         CONFIG_BUTTON(flag, JOYSTICK_1, BUTTON, BUTTON_A)
 */
 #define CONFIG_BUTTON(name, __index, __type, __button) \
-    BUTTON_CONFIG.name.button = __button; \
-    BUTTON_CONFIG.name.joystickIndex = __index; \
-    BUTTON_CONFIG.name.type = __type;
+    BUTTON_CONFIG->name.button = __button; \
+    BUTTON_CONFIG->name.joystickIndex = __index; \
+    BUTTON_CONFIG->name.type = __type;
 
 typedef enum {
 	INVALID,
@@ -36,17 +36,17 @@ typedef struct {
 	ButtonType type;
 } ButtonConfigDef;
 
-typedef struct {
-	ButtonConfigDef liftUp;
-	ButtonConfigDef liftDown;
-	ButtonConfigDef auxiliaryLift;
-	ButtonConfigDef flagUp;
-	ButtonConfigDef flagDown;
-} ButtonConfig;
-
 const short BUTTON_UP = 0;
 const short BUTTON_DOWN = 1;
 
-ButtonConfig BUTTON_CONFIG;
+/* NOTE: This struct magic is the exactly the same as how it it done in
+         MotorConfig.h
+*/
 
-bool isButtonDown(ButtonConfigDef def);
+struct ButtonConfigImpl;
+typedef ButtonConfigImpl ButtonConfig;
+
+ButtonConfig _BUTTON_CONFIG;
+const ButtonConfig *BUTTON_CONFIG = &_BUTTON_CONFIG;
+
+bool isButtonDown(ButtonConfigDef *def);

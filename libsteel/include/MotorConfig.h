@@ -48,12 +48,15 @@ typedef struct
 	bool isEnabled;
 } MotorConfigDef;
 
-// struct MotorConfig is implemented by the user
 const int NO_MOTOR_ID = -1;
 
+// struct MotorConfigImml is implemented by the user
 struct MotorConfigImpl;
 typedef MotorConfigImpl MotorConfig;
 
+/* HACK: For some strange reason, you have to reference the fancy forward
+         declared struct with a pointer to it. Don't ask me why, but this works.
+*/
 MotorConfig _MOTOR_CONFIG;
 const MotorConfig *MOTOR_CONFIG = &_MOTOR_CONFIG;
 

@@ -2,7 +2,8 @@
 #include "libsteel/include/MotorConfig.h"
 #include "libsteel/interface/MotorUtilInterface.h"
 
-#include "include/MotorConfigImpl.h"
+#include "config/MotorConfigImpl.h"
+
 #include "include/JoystickImpl.h"
 #include "include/DrivingModes.h"
 

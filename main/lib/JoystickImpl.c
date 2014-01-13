@@ -1,6 +1,6 @@
 #pragma once
 #include "include/JoystickImpl.h"
-#include "include/MotorConfigImpl.h"
+#include "config/MotorConfigImpl.h"
 
 void doJoystickUpdate()
 {
@@ -51,13 +51,13 @@ void updateLift()
 {
 	if (!MOTOR_CONFIG->lift.isEnabled) return;
 
-	if (isButtonDown(BUTTON_CONFIG.liftUp))
+	if (isButtonDown(BUTTON_CONFIG->liftUp))
 	{
 		setGroupPower(MOTOR_CONFIG->lift, LIFT_POWER);
 		return;
 	}
 
-	if (isButtonDown(BUTTON_CONFIG.liftDown))
+	if (isButtonDown(BUTTON_CONFIG->liftDown))
 	{
 		setGroupPower(MOTOR_CONFIG->lift, -LIFT_POWER);
 		return;
@@ -70,13 +70,13 @@ void updateLift()
 {
 	if (!MOTOR_CONFIG->lift.isEnabled) return;
 
-	if (isButtonDown(BUTTON_CONFIG.liftDown))
+	if (isButtonDown(BUTTON_CONFIG->liftDown))
 	{
 		setPower(MOTOR_CONFIG->lift, -100);
 		return;
 	}
 
-	if (isButtonDown(BUTTON_CONFIG.liftUp))
+	if (isButtonDown(BUTTON_CONFIG->liftUp))
 	{
 		setPower(MOTOR_CONFIG->lift, 100);
 		return;
@@ -89,13 +89,13 @@ void updateFlag()
 {
 	if(!MOTOR_CONFIG->flag.isEnabled) return;
 
-	if (isButtonDown(BUTTON_CONFIG.flagUp))
+	if (isButtonDown(BUTTON_CONFIG->flagUp))
 	{
 		setPower(MOTOR_CONFIG->flag, FLAG_POWER);
 		return;
 	}
 
-	if (isButtonDown(BUTTON_CONFIG.flagDown))
+	if (isButtonDown(BUTTON_CONFIG->flagDown))
 	{
 		setPower(MOTOR_CONFIG->flag, -FLAG_POWER);
 		return;
