@@ -1,8 +1,17 @@
 #pragma once
 
-#include "../../lib/Includes.h"
+/** NOTE:
+   		This file should only be included in the main program file being
+		compiled. Use the specific header file for including references.
+ **/
 
-#include "InitConfigImpl.c"
+#include "libsteel/Includes.h"
+
+#include "include/MotorConfigImpl.h"
+
+#include "KernelConfigImpl.c"
 #include "MotorConfigImpl.c"
 #include "ButtonConfigImpl.c"
 #include "JoystickImpl.c"
+#include "MotorUtilImpl.c"
+#include "DrivingModes.c"

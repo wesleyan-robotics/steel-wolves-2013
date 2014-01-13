@@ -15,5 +15,5 @@
 task run()
 {
 	setWheelPower(100);
-	setPower(MC->flag, 100);
+	setPower(MOTOR_CONFIG->flag, 100);
 }

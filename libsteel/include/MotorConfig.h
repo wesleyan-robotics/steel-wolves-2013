@@ -14,9 +14,9 @@
         CONFIG_MOTOR(wheelGroup[FRONT_LEFT], motorWheelFrontLeft, TYPE_MOTOR, true)
 */
 #define CONFIG_MOTOR(def, __id, __type, __isEnabled) \
-    MOTOR_CONFIG.def.id = __id; \
-    MOTOR_CONFIG.def.type = __type; \
-    MOTOR_CONFIG.def.isEnabled = __isEnabled;
+    MOTOR_CONFIG->def.id = __id; \
+    MOTOR_CONFIG->def.type = __type; \
+    MOTOR_CONFIG->def.isEnabled = __isEnabled;
 
 /*  Descrption:
         Loops through a motor group assuming that there is a `NULL`
@@ -25,7 +25,7 @@
         Use `FOREACH_MOTOR_IN_GROUP` as the for loop and `INDEX` to get the
         current index in the array
     Example:
-        MotorConfigDef *group = MOTOR_CONFIG.wheelGroup;
+        MotorConfigDef *group = MOTOR_CONFIG->wheelGroup;
         FOREACH_MOTOR_IN_GROUP(group)
         {
             group[INDEX].isEnabled = false;
@@ -48,37 +48,14 @@ typedef struct
 	bool isEnabled;
 } MotorConfigDef;
 
-typedef enum
-{
-	FRONT_LEFT  = 0,
-    FRONT_RIGHT = 1,
-    BACK_LEFT   = 2,
-    BACK_RIGHT  = 3
-} WheelGroupID;
-
-typedef enum
-{
-	MOTOR_LEFT = 0,
-    MOTOR_RIGHT = 1
-} SideGroupID;
-
-// Note: All the lengths are +1 since we want a NULL terminator
-const int WHEEL_GROUP_LEN = 5;
-const int SIDE_GROUP_LEN = 3;
-
-typedef struct
-{
-    MotorConfigDef bucketGroup[SIDE_GROUP_LEN];
-    MotorConfigDef wheelGroup[WHEEL_GROUP_LEN];
-    MotorConfigDef lift;
-    MotorConfigDef flag;
-} MotorConfig;
-
-
+// struct MotorConfig is implemented by the user
 const int NO_MOTOR_ID = -1;
 
-MotorConfig MOTOR_CONFIG;
-const MotorConfig *MC = &MOTOR_CONFIG;
+struct MotorConfigImpl;
+typedef MotorConfigImpl MotorConfig;
+
+MotorConfig _MOTOR_CONFIG;
+const MotorConfig *MOTOR_CONFIG = &_MOTOR_CONFIG;
 
 int getPower(MotorConfigDef *def);
 void setPower(MotorConfigDef *def, int power);

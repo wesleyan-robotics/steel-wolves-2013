@@ -1,6 +1,6 @@
 #pragma once
-#include "../include/ButtonConfig.h"
-#include "../include/JoystickDriver.h"
+#include "include/ButtonConfig.h"
+#include "include/JoystickDriver.h"
 
 #define EMULATOR_TARGET  (defined(NXT) || defined(TETRIX)) && defined(_Target_Emulator_)
 

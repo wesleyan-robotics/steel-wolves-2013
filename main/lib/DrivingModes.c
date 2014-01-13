@@ -1,13 +1,14 @@
 #pragma once
-#include "lib/include/MotorUtil.h"
+#include "libsteel/include/MotorConfig.h"
+#include "libsteel/interface/MotorUtilInterface.h"
 
-#include "Includes.h"
+#include "include/MotorConfigImpl.h"
 #include "include/JoystickImpl.h"
 #include "include/DrivingModes.h"
 
 void updateWithArcadeDriving()
 {
-	if (!isGroupEnabled(MOTOR_CONFIG.wheelGroup)) return;
+	if (!isGroupEnabled(MOTOR_CONFIG->wheelGroup)) return;
 
 	int y = joystick.joy1_y1;
 	int x = joystick.joy1_x2;
@@ -37,7 +38,7 @@ void updateWithArcadeDriving()
 
 void updateWithTankDriving()
 {
-	if (!isGroupEnabled(MOTOR_CONFIG.wheelGroup)) return;
+	if (!isGroupEnabled(MOTOR_CONFIG->wheelGroup)) return;
 
 	int left = joystick.joy1_y1;
 	int right = joystick.joy1_y2;
