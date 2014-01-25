@@ -59,8 +59,8 @@ typedef enum
 
 typedef enum
 {
-	MOTOR_LEFT = 0,
-    MOTOR_RIGHT = 1
+	SIDE_LEFT = 0,
+    SIDE_RIGHT = 1
 } SideGroupID;
 
 // Note: All the lengths are +1 since we want a NULL terminator
@@ -69,10 +69,10 @@ const int SIDE_GROUP_LEN = 3;
 
 typedef struct
 {
-    MotorConfigDef liftGroup[SIDE_GROUP_LEN];
-    MotorConfigDef bucketGroup[SIDE_GROUP_LEN];
     MotorConfigDef wheelGroup[WHEEL_GROUP_LEN];
-    MotorConfigDef auxiliaryLift;
+    MotorConfigDef lift;
+    MotorConfigDef bucketGroup[SIDE_GROUP_LEN];
+    MotorConfigDef bucketRack;
     MotorConfigDef flag;
 } MotorConfig;
 
