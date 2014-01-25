@@ -1,5 +1,5 @@
 #pragma once
-#include "libsteel/include/MotorConfig.h"
+#include "../../libsteel/include/MotorConfig.h"
 
 typedef enum
 {

@@ -1,6 +1,6 @@
 #pragma once
-#include "libsteel/include/MotorConfig.h"
-#include "libsteel/interface/MotorUtilInterface.h"
+#include "../../libsteel/include/MotorConfig.h"
+#include "../../libsteel/interface/MotorUtilInterface.h"
 
 #include "config/MotorConfigImpl.h"
 

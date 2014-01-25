@@ -1,5 +1,5 @@
 #pragma once
-#include "libsteel/include/ButtonConfig.h"
+#include "../../../libsteel/include/ButtonConfig.h"
 
 struct {
 	SL_ButtonConfigDef liftUp;
